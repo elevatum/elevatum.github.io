@@ -4,35 +4,347 @@
   <title>Elevatum</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">  
+  <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
   <style>
     body {     
       font-family: 'Montserrat', sans-serif;
-      background: #0f172a;
-      color: white;
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      line-height: 1.6;      
+      background: #494d60;
+      color: #081626; 
+      line-height: 1.6;   
+      background-image: url("https://www.transparenttextures.com/patterns/crossword.png");
+      background-image: url("https://www.transparenttextures.com/patterns/redox-01.png");
+      background-image: url("https://www.transparenttextures.com/patterns/subtle-white-feathers.png");
     }
+
+    strong {color:#484e5e;}
+
+    .content { border-radius: 24px; background: white; max-width: 80%; margin: 50px auto; padding: 2rem; }
     h1 {
-      font-size: 3rem;
-      letter-spacing: 2px;
+      font-size: 2.5rem;
+      xletter-spacing: 2px;
       font-family: 'Baloo 2', sans-serif;
+      line-height: 1.1;
+      margin: 0;
+      color: #696f89;
     }
-    span {
-      color: #3b82f6;
+
+    h2 {color:#303d50;}
+    h3 {color:#303d50;}
+    h4 {color:#303d50;}
+
+    p.tagline {
+      margin: 0 0 3rem 0;           /* remove extra space */
+      font-size: 21px;
+      xcolor: #bfaeff;
+      font-style: italic;
+      line-height: 1;display:none;
     }
-    p {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #cbd5e1;
+
+    span { xcolor: #7bbbff; }
+
+    a { color: #36394a; text-decoration: none; cursor: pointer; }
+    a:hover { text-decoration: underline; }
+
+    /* --- 3-part layout --- */
+    .horizontal-panel {
+      xbackground: #1e293b;
+      xpadding: 1rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .content-wrapper {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .toc {
+      flex: none;
+      width: auto;
+      white-space: nowrap;
+      background: #d9c9cd;
+      padding: 0 1rem;
+      border-radius: 8px;
+    }
+
+    .item-display {
+      flex: 2;
+      background: #b6e0e7;
+      padding: 0 1rem;
+      border-radius: 8px;
+      min-height: 200px;
+    }
+
+    /* Hide all items initially */
+    .item {
+      display: none;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 768px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
     }
   </style>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">  
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">  
 </head>
 <body>
-  <h1>Elev<span>atum</span></h1>
-  <p>Elevate Results.</p>
+
+  <div class="content">
+  <h1>elev<span>atum</span></h1>
+  <p class="tagline"><em>where code takes flight</em></p>
+
+  <div class="horizontal-panel">
+
+  <!--<h2>Portfolio Overview</h2>-->
+
+  <p>A collection of custom-built tools and utilities developed for both web and desktop platforms. These applications solve complex, real-world problems in production environments, delivering automation solutions that improve content workflows, ensure accessibility compliance, and generate significant operational efficiencies. Each project demonstrates the ability to translate practical challenges into scalable, production-grade systems. This body of work represents solution architecture and advisory practice focused on delivering measurable improvements in enterprise content delivery and process automation.</p>
+
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>Jira Ecosystem  <i class="fas fa-home" style="float:right; cursor:pointer;" onclick="showItem('default')"></i></h3>
+      <ul>
+        <li><a onclick="showItem('workload')">Workload Distribution (2026)</a></li>
+        <li><a onclick="showItem('jira')">JIRA SyncFlow (2026)</a></li>
+      </ul>
+
+      <h3>Document & Accessibility Automation</h3>
+      <ul>
+        <li><a onclick="showItem('docprep')">DocPrep (2026)</a></li>
+        <li><a onclick="showItem('xmlmorph')">XML Morph (2023)</a></li>
+        <li><a onclick="showItem('codebot')">CodeBOT (2020)</a></li>
+        <li><a onclick="showItem('autopdf')">AutoPDF Builder (2020)</a></li>
+        <li><a onclick="showItem('flashconv')">Flash-Conv (2019)</a></li>
+        <li><a onclick="showItem('flashcode')">Flash-Code (2019)</a></li>
+      </ul>
+
+      <h3>Table Automation Framework</h3>
+      <ul>
+        <li><a onclick="showItem('tablextract')">TableXtract (2025)</a></li>
+        <li><a onclick="showItem('tablecraft')">TableCraft (2024)</a></li>
+        <li><a onclick="showItem('tablesync')">TableSync Mirror (2024)</a></li>
+        <li><a onclick="showItem('tablenote')">TableNote (2021)</a></li>
+      </ul>
+    </div>
+
+    <!-- Description / Item Display -->
+    <div class="item-display">
+
+      <div id="default" class="item">
+        <p>Check out the <a href="https://www.youtube.com/@elevatumdev">elevatum YouTube channel</a> to see these apps in action!</p>
+        
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/QWvQmaOP_jg?si=svVLvGAwfifaMrMm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        
+      </div>
+      
+      <!-- Jira Ecosystem -->
+      <div id="workload" class="item">
+        <h4>Workload Distribution (2026)</h4>
+        <p>A real‑time dashboard that extracts and visualizes team workload directly from a Jira project view. It consolidates paginated ticket data into a single interactive panel, providing instant visibility into how work is distributed across the team and who has available capacity.</p>
+        <p>Core capabilities:</p>
+
+        <ul>
+          <li><strong>Unified data view:</strong> automatically aggregates tickets from across paginated tables, presenting every team member and their current assignments in one place, eliminating the need to click through multiple pages or manually track counts</li>
+          <li><strong>Team capacity indicators:</strong> color‑coded stats immediately reveal who is busy and who has workload availability, turning raw ticket data into actionable insight</li>
+          <li><strong>One‑click person filtering:</strong> click any team member's name to instantly isolate their tickets in the main table, ideal for quick progress checks without manual searching</li>
+          <li><strong>Status‑based navigation:</strong> toggle between workflow stages via dedicated buttons, each showing the total ticket count for that status to maintain context while switching views</li>
+          <li><strong>Dynamic workload metrics:</strong> switch between raw ticket counts and percentage‑of‑status distribution to understand both absolute volume and relative team share</li>
+          <li><strong>Focused team scope:</strong> displays data exclusively for team members, excluding unrelated assignees to ensure the dashboard always reflects your actual team composition</li>
+          <li><strong>Interactive data table:</strong> sort any column with a single click; headers stay visible while scrolling</li>
+        </ul>
+
+        <p><strong>✓ Zero infrastructure:</strong> no installation, no backend dependencies, no system admin approvals</p>
+      </div>
+
+      <div id="jira" class="item">
+        <h4>JIRA SyncFlow (2026)</h4>
+        <p>This tool centralizes an existing, multi-step ticketing workflow into a single interface. It accelerates the JIRA review and pre-approval stages by reducing context switching, guiding key decision points, and supporting accurate, consistent communications. It requires no backend services or environment setup.</p><p>Operational enhancements:</p>
+
+        <ul>
+          <li><strong>Consolidated workspace:</strong> eliminates the need to search across multiple sections of a ticket and navigate multiple platforms (Jira, Outlook, and AEM)</li>
+          <li><strong>Workflow friction reduction:</strong> removes unnecessary steps by integrating multiple tasks into a single interface, helping move tickets through review and approval stages faster</li>
+          <li><strong>Adaptive workflow guidance:</strong> detects the current ticket status and suggests the appropriate transition action, including safe rollback options when reversions are required</li>
+          <li><strong>Status timer indicator:</strong> shows how long a ticket has remained in its current stage, providing immediate insight into issues that are stalled, delayed, or overdue</li>
+          <li><strong>One-click page access:</strong> opens all listed staging URLs instantly, either in the AEM editor or preview environment, without copying links individually or switching platforms</li>
+          <li><strong>Email draft generator:</strong> pre-fills recipients, subject lines, and relevant URLs, letting users switch between preview links for client approval or live links for final distribution</li>
+        </ul>
+
+        <p><strong>✓ Zero infrastructure:</strong> no installation, no backend dependencies, no system admins approvals</p>
+      </div>
+
+      <!-- Document & Accessibility Automation -->
+      <div id="docprep" class="item">
+        <h4>DocPrep (2026)</h4>
+        <p>An application that provides pre-production analysis of Microsoft Word documents, identifying accessibility and structural issues while delivering actionable diagnostics through automated validation and accessibility scoring. Key Features:</p>
+
+        <ul>
+          <li><strong>Comprehensive accessibility audit:</strong> detects missing alt text, malformed headings and lists, table structure errors, empty and colored background cells, and formatting issues (all caps, underline, italic usage)</li>
+          <li><strong>Smart link verification:</strong> validates external links in real-time, flags local/email links, and identifies same-text-different-URL inconsistencies</li>
+          <li><strong>Document health check:</strong> flags tracked changes and comments that impact diagnostic accuracy</li>
+          <li><strong>Priority-driven workflow:</strong> categorizes fixes by impact (high, medium, low) with detailed counts for each category</li>
+          <li><strong>Accessibility score:</strong> calculates an overall accessibility percentage and provides detailed health metrics for each content category</li>
+          <li><strong>Interactive diagnostic reports:</strong> generates a Word file featuring a TOC with CTRL+clickable links to flagged issues for review and correction</li>
+          <li><strong>Privacy-first analysis:</strong> the entire document is processed locally for security; only URLs are sent externally for link validation</li>
+          <li><strong>Tech stack:</strong> JavaScript, Microsoft Azure Functions (Python), HTML, CSS</li>
+          <li><strong>System Architecture:</strong> see the technical workflow <a href="https://drive.google.com/file/d/1Wuu778WfrvgWznzPZ6uKAu530AAjsbiu/view?usp=drive_link">diagram</a></li>
+        </ul>
+      </div>
+
+      <div id="xmlmorph" class="item">
+        <h4>XML Morph (2023)</h4>
+        <p>This tool effortlessly transforms well-structured HTML into custom XML format used in <a href="https://www.tbs-sct.canada.ca/pol/index-eng.aspx">TBS policy documents</a>, streamlining the conversion process. Here's a summary of its main functions and behavior:</p>
+        <ul>
+          <li><strong>Initial storage:</strong> stores the user's original pasted content so it can be reverted or compared later</li>
+          <li><strong>HTML to XML conversion:</strong> converts HTML into a custom XML format that includes structural elements like chapters, appendices, clauses, and sections. it also adds headers, handles special characters, and replaces standard list tags with more semantic equivalents</li>
+          <li><strong>XML to HTML conversion:</strong> reverses the above process, stripping out XML wrappers and reconstructing readable HTML.</li>
+          <li><strong>List handling:</strong> distinguishes between clause-style lists and normal lists to ensure only the appropriate ones are converted to &lt;clause&gt; elements</li>
+          <li><strong>Section wrapping:</strong> automatically groups headings and their following content into semantic sections based on heading levels</li>
+          <li><strong>Preview and error display:</strong> renders color-coded structured output and displays error messages or a parsed view as needed</li>
+          <li><strong>Cleanup:</strong> removes style elements and ensures self-closing tags are handled correctly</li>
+          <li><strong>Validation:</strong> checks for matching and balanced HTML/XML tags, reporting issues if any tags are unbalanced or improperly structured</li>
+        </ul>
+      </div>
+
+      <div id="codebot" class="item">
+        <h4>CodeBOT (2020)</h4>
+        <p>Analytics-driven automated HTML editor that opens Word documents of all sizes while applying the Canadian Standard on Web Accessibility. CodeBOT combines a sequential processing pipeline from core syntax cleanup to content structuring, streamlining the conversion workflow and supporting WCAG compliance through the following key operations:</p>
+        <ul>
+          <li><strong>Syntax cleanup:</strong> removes proprietary Microsoft markup, deprecated attributes, extra spaces, line breaks, and empty tags for cleaner, standards-compliant HTML</li>
+          <li><strong>Dynamic language detection:</strong> applies language-specific formatting to English or French content</li>
+          <li><strong>Content structuring:</strong> builds table of contents, corrects malformed structural elements, encodes images and bilingual footnotes, adds semantic section tags, and formats definition lists</li>
+          <li><strong>Table accessibility:</strong> allows users to navigate each table either directly within the editor or through a modal preview built on a Shadow DOM architecture. It applies proper table markup (&lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;), sets auto-scope attributes, and enables toggling of basic formatting options</li>
+          <li><strong>URL processing:</strong> decodes Outlook Safe Links, converts absolute URLs to relative paths, and provides a Link Status Report that identifies broken links</li>
+          <li><strong>Analytics and feedback:</strong> provides real-time counts displayed beside each operation, allowing users to immediately see how many instances of specific issues or elements (such as deprecated attributes or footnotes) are present in the HTML. This helps users quickly assess the scope of cleanup and improvements needed</li>
+          <li><strong>Real-time validation:</strong> automatically detects HTML syntax errors, invalid heading hierarchy structure, accessibility errors, and displays them in the console panel, with each message clickable to jump directly to the specific line number</li>
+          <li><strong>Tech stack:</strong> JavaScript, HTML, CSS, CodeMirror 5.65.2, Google Apps Script (serverless backend)</li>
+          <li><strong>System Architecture:</strong> discover the <a href="https://drive.google.com/file/d/1qXux1SxFKpFwRn63WOhKlfSmyu-RP5I1/view?usp=drive_link">visual overview</a> illustrating the sequential pipeline and automated processing flow</li>
+        </ul>
+
+        <h3>Modules added since rollout</h3>
+
+        <ul>
+          <li><strong>TableNote Pro (2022):</strong> an enhanced version of TableNote (2021), a tool for auto-generating footnotes in HTML tables. It provides new options such as toggling footnotes on or off, visual highlighting to identify and trace footnote references, and the ability to inject the footnote section directly within the table</li>
+          <li><strong>Link Validator (2024):</strong> a utility that runs in parallel yet independently of main editing tasks. It scans all hyperlinks to detect broken, redirected, or malformed URLs and generates a detailed status report complete with visual indicators, copy/export tools, and an HTTP status legend. It features a 3-slot FIFO popup architecture ensuring only the latest reports are visible. Built from scratch, this component can be integrated into other systems with minimal modification</li>
+          <li><strong>Paste from external sources (2025):</strong> this feature expands CodeBOT’s capabilities beyond its original support for .docx files and plain text, allowing users to copy and paste content from a variety of sources (Word, Excel, web pages, Google Sheets, etc.) directly into the editor while preserving structure and formatting</li>
+          <li><strong>Link Validator (2025 – Redesigned):</strong> a fully revamped system featuring a dedicated Link Validation section, Google Sheets export, Outlook email integration, and archive management, streamlining workflow and enhancing user focus</li>
+        </ul>
+      </div>
+
+      <div id="autopdf" class="item">
+        <h4>AutoPDF Builder (2020)</h4>
+        <p>This application automates a previously manual time-consuming task by converting web pages into bilingual PDF files. It reads URLs from a spreadsheet and processes each one through the following steps:</p>
+        <ul>
+          <li>Loads the web page and prepares it for printing by expanding all collapsible elements (&lt;details&gt; tags), ensuring that all content is visible</li>
+          <li>Removes non-essential elements like breadcrumb navigation and archived notices to produce a cleaner and more focused print output</li>
+          <li>Automatically configures the browser's print settings (e.g., layout, margins, headers/footers) to ensure consistent PDF formatting</li>
+          <li>Saves the English version of the page as a PDF, then switches to the corresponding French page to repeat the preparation and PDF conversion steps, producing a bilingual counterpart</li>
+          <li><strong>Tech stack:</strong> Python, Selenium WebDriver, Chrome browser, JavaScript, Microsoft Excel</li>
+        </ul>
+      </div>
+
+      <div id="flashconv" class="item">
+        <h4>Flash-Conv (2019)</h4>
+        <p>Batch-driven desktop application that converts Word documents both new and old legacy formats (doc and docx) to clean, valid HTML5, automating a typically tedious manual process common in government departments. Key features:</p>
+        <ul>
+          <li><strong>Batch processing:</strong> supports single-file or batch conversion from either a ZIP archive or directory, handling of large volumes with minimal user input</li>
+          <li><strong>Analytics:</strong> uses data science concepts to analyze HTML output by tabulating content, visualizing patterns with graphs, and applying mathematical methods to assess the complexity of the conversion process. This analytical insight helps identify challenges, optimize workflows, and improve overall conversion quality and efficiency</li>
+          <li><strong>Performance metrics:</strong> efficiently processes batches of up to 1,000 files in about 10 minutes with analytics feature enabled, or 2.5 minutes without analytics</li>
+          <li><strong>Corrupted file recovery:</strong> automatically flags and converts damaged files that cannot be opened manually</li>
+          <li><strong>Outlook integration:</strong> results are emailed automatically via Outlook for streamlined delivery</li>
+          <li><strong>Tech stack:</strong> Python, JavaScript, Vue.js, Chart.js, Win32com.client, HTML, CSS, Headless Chrome</li>
+        </ul>
+      </div>
+
+      <div id="flashcode" class="item">
+        <h4>Flash-Code (2019)</h4>
+        <p>An innovative desktop application designed for Web Publishing tasks. It offers customized automation features that streamline routine publishing tasks, allowing users to work faster and more efficiently than with traditional code editors. Unlike standard tools, Flash-Code provides unique capabilities not found in other editors:</p>
+        <ul>
+          <li><strong>Instant conversion:</strong> opens Word documents in HTML</li>
+          <li><strong>Batch operations:</strong> runs multiple search-and-replace commands simultaneously</li>
+          <li><strong>Drupal integration:</strong> creates web pages by populating HTML content and access HTML source code without login</li>
+          <li><strong>Table accessibility:</strong> extracts HTML tables for interaction with the WET4 Table Validator, then reintegrates the accessible code into the application</li>
+          <li><strong>Customization:</strong> configures images, lists, inks, and footnotes using built-in tools for consistent formatting</li>
+          <li><strong>Access control:</strong> ensures the application runs only on approved devices and accounts, while detecting and reporting any unauthorized access attempts</li>
+          <li><strong>Platform integration:</strong> Drupal 7, Outlook, WET4 Table Validator</li>
+          <li><strong>Tech stack:</strong> Python, JavaScript, JQuery, Win32com.client, HTML, CSS, Bootstrap 4.3.1, CodeMirror 5.43.0, Headless Chrome</li>
+        </ul>
+      </div>
+
+      <!-- Table Automation Framework -->
+      <div id="tablextract" class="item">
+        <h4>TableXtract (2025)</h4>
+        <p>Cloud-based microservice that converts table images into structured HTML. It accepts binary image uploads, performs server-side OCR and table detection, and returns clean, standardized output ready for downstream automation. The service runs in both local and web-based environments, delivering fast and consistent results. Built as a scalable, serverless component, TableXtract can be easily integrated into existing applications and workflows that require accurate table extraction from screenshots, scans, or other image sources. Core features:</p>
+
+        <ul>
+          <li><strong>Smart table recognition:</strong> automatically identifies tables and their structure in images using AI-powered analysis</li>
+          <li><strong>Spell check integration:</strong> flags potential spelling errors in extracted text with visual highlighting and suggested corrections</li>
+          <li><strong>Clean HTML output:</strong> produces well-structured, accessible HTML tables ready for direct use or automation</li>
+          <li><strong>Flexible output options:</strong> provides easy ways to copy, download, and preview results, including a code view toggle for developer workflows</li>
+          <li><strong>Drag-and-drop interface:</strong> supports intuitive file uploads with instant preview for common image formats (JPEG, PNG, BMP, GIF)</li>
+          <li><strong>Tech stack:</strong> Microsoft Azure (serverless backend), Python, HTML, JavaScript, CSS</li>
+        </ul>
+
+        <p>Try <a href="https://tablextractstorage.z19.web.core.windows.net/">TableXtract</a> live!</p>
+      </div>
+
+      <div id="tablecraft" class="item">
+        <h4>TableCraft (2024)</h4>
+        <p>Originally designed with financial data in mind, this tool provides a graphical interface for editing and customizing HTML tables. It enables quick styling and structural changes, while also managing accessibility attributes without the need to write HTML code. Here's a breakdown of what the application does:</p>
+        <ul>
+          <li><strong>Real-time preview:</strong> displays a live preview of your HTML table as you type, showing changes instantly</li>
+          <li><strong>Interactive editing:</strong> users can click directly on table cells, columns, or the caption in the preview to apply changes</li>
+          <li><strong>Flexible operations:</strong> ability to choose from various modes to edit single cells, entire columns, or the caption, and apply styles, structure changes, or accessibility attributes</li>
+          <li><strong>Undo and cleanup:</strong> easily reverse recent modifications or clean up the HTML by removing unnecessary tags or classes</li>
+          <li><strong>Code management:</strong> copy the cleaned HTML to your clipboard or reset the table to its initial state</li>
+        </ul>
+      </div>
+
+      <div id="tablesync" class="item">
+        <h4>TableSync Mirror (2024)</h4>
+        <p>This tool easily synchronizes two HTML tables by transferring only the updated content from one table to another, while preserving the original formatting and structure.</p>
+      </div>
+
+      <div id="tablenote" class="item">
+        <h4>TableNote (2021)</h4>
+        <p>This tool simplifies the process of adding footnotes to your HTML tables by automatically generating and formatting them. It offers an efficient solution for numbering footnotes, applying symbols, and managing multi-referenced footnotes. Features overview:</p>
+        <ul>
+          <li>Generates footnotes wrapped in &lt;sup&gt; tags</li>
+          <li>Processes numbers sequentially followed by symbols</li>
+          <li>Supports multi-referenced footnotes</li>
+          <li>Automatically retrieves and pre-fills the table ID from the &lt;caption&gt;</li>
+          <li>Dynamically toggles between English and French instantly updating markup upon selection</li>
+          <li>Creates a dedicated footnotes section below the table</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function showItem(id) {
+      // hide all items
+      const items = document.querySelectorAll('.item');
+      items.forEach(item => item.style.display = 'none');
+
+      // show selected
+      const el = document.getElementById(id);
+      if(el) el.style.display = 'block';
+    }
+
+  // show default item on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    showItem('default');  // replace 'default' with your actual default item id
+  });
+  </script>
+</div>
+
 </body>
 </html>
