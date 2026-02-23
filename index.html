@@ -345,18 +345,23 @@
   <script>
 function showItem(id) {
 
-  // hide all items
-  const items = document.querySelectorAll('.item');
-  items.forEach(item => item.style.display = 'none');
+  // 1. Hide all items
+  document.querySelectorAll('.item')
+    .forEach(item => item.style.display = 'none');
 
-  // show selected
+  // 2. Show selected
   const el = document.getElementById(id);
   if (el) el.style.display = 'block';
 
-  // remove active class from all TOC links
+  // 3. Clear all active states
   document.querySelectorAll('.toc a')
-    .forEach(l => l.classList.remove('active'));
+    .forEach(link => link.classList.remove('active'));
 
+  // 4. Activate matching TOC link
+  const activeLink = document.querySelector(`.toc a[onclick="showItem('${id}')"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
 }
 
   // show default item on page load
@@ -364,17 +369,6 @@ function showItem(id) {
     showItem('default');  // replace 'default' with your actual default item id
   });
 
-document.querySelectorAll('.toc a').forEach(link => {
-  link.addEventListener('click', function(e) {
-
-    if (this.classList.contains('active')) {
-      e.preventDefault();
-      return;
-    }
-
-    this.classList.add('active');
-  });
-});
   </script>
 </div>
 
