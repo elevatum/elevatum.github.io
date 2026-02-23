@@ -79,6 +79,7 @@
     }
 
     .toc ul, .toc a {color: white;}
+    .toc a.active {color: #f4d0bc; pointer-events: none; text-decoration: none; cursor: default; }
 
     .item-display {
       flex: 2;
@@ -95,6 +96,7 @@
     }
 
     sup { color: #f4d0bc; font-size: 12px;}
+    code { color: #fff; font-size: 14px; background:#626783; border-radius: 4px; padding: 2px 4px;}
     
     /* Mobile layout */
     @media (max-width: 768px) {
@@ -217,7 +219,7 @@
           <li><strong>Initial storage:</strong> stores the user's original pasted content so it can be reverted or compared later</li>
           <li><strong>HTML to XML conversion:</strong> converts HTML into a custom XML format that includes structural elements like chapters, appendices, clauses, and sections. it also adds headers, handles special characters, and replaces standard list tags with more semantic equivalents</li>
           <li><strong>XML to HTML conversion:</strong> reverses the above process, stripping out XML wrappers and reconstructing readable HTML.</li>
-          <li><strong>List handling:</strong> distinguishes between clause-style lists and normal lists to ensure only the appropriate ones are converted to &lt;clause&gt; elements</li>
+          <li><strong>List handling:</strong> distinguishes between clause-style lists and normal lists to ensure only the appropriate ones are converted to <code>&lt;clause&gt;</code> elements</li>
           <li><strong>Section wrapping:</strong> automatically groups headings and their following content into semantic sections based on heading levels</li>
           <li><strong>Preview and error display:</strong> renders color-coded structured output and displays error messages or a parsed view as needed</li>
           <li><strong>Cleanup:</strong> removes style elements and ensures self-closing tags are handled correctly</li>
@@ -232,7 +234,7 @@
           <li><strong>Syntax cleanup:</strong> removes proprietary Microsoft markup, deprecated attributes, extra spaces, line breaks, and empty tags for cleaner, standards-compliant HTML</li>
           <li><strong>Dynamic language detection:</strong> applies language-specific formatting to English or French content</li>
           <li><strong>Content structuring:</strong> builds table of contents, corrects malformed structural elements, encodes images and bilingual footnotes, adds semantic section tags, and formats definition lists</li>
-          <li><strong>Table accessibility:</strong> allows users to navigate each table either directly within the editor or through a modal preview built on a Shadow DOM architecture. It applies proper table markup (&lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;), sets auto-scope attributes, and enables toggling of basic formatting options</li>
+          <li><strong>Table accessibility:</strong> allows users to navigate each table either directly within the editor or through a modal preview built on a Shadow DOM architecture. It applies proper table markup (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>), sets auto-scope attributes, and enables toggling of basic formatting options</li>
           <li><strong>URL processing:</strong> decodes Outlook Safe Links, converts absolute URLs to relative paths, and provides a Link Status Report that identifies broken links</li>
           <li><strong>Analytics and feedback:</strong> provides real-time counts displayed beside each operation, allowing users to immediately see how many instances of specific issues or elements (such as deprecated attributes or footnotes) are present in the HTML. This helps users quickly assess the scope of cleanup and improvements needed</li>
           <li><strong>Real-time validation:</strong> automatically detects HTML syntax errors, invalid heading hierarchy structure, accessibility errors, and displays them in the console panel, with each message clickable to jump directly to the specific line number</li>
@@ -240,10 +242,10 @@
           <li><strong>System Architecture:</strong> discover the <a href="assets/codebot-diagram.pdf">visual overview</a> illustrating the sequential pipeline and automated processing flow</li>
         </ul>
 
-        <h3>Modules added since rollout</h3>
+        <h4>Modules added since rollout</h4>
 
         <ul>
-          <li><strong>TableNote Pro (2022):</strong> an enhanced version of TableNote (2021), a tool for auto-generating footnotes in HTML tables. It provides new options such as toggling footnotes on or off, visual highlighting to identify and trace footnote references, and the ability to inject the footnote section directly within the table</li>
+          <li><strong>TableNote Pro (2022):</strong> an enhanced version of <a onclick="showItem('tablenote')">TableNote (2021)</a>, a tool for auto-generating footnotes in HTML tables. It provides new options such as toggling footnotes on or off, visual highlighting to identify and trace footnote references, and the ability to inject the footnote section directly within the table</li>
           <li><strong>Link Validator (2024):</strong> a utility that runs in parallel yet independently of main editing tasks. It scans all hyperlinks to detect broken, redirected, or malformed URLs and generates a detailed status report complete with visual indicators, copy/export tools, and an HTTP status legend. It features a 3-slot FIFO popup architecture ensuring only the latest reports are visible. Built from scratch, this component can be integrated into other systems with minimal modification</li>
           <li><strong>Paste from external sources (2025):</strong> this feature expands CodeBOT’s capabilities beyond its original support for .docx files and plain text, allowing users to copy and paste content from a variety of sources (Word, Excel, web pages, Google Sheets, etc.) directly into the editor while preserving structure and formatting</li>
           <li><strong>Link Validator (2025 – Redesigned):</strong> a fully revamped system featuring a dedicated Link Validation section, Google Sheets export, Outlook email integration, and archive management, streamlining workflow and enhancing user focus</li>
@@ -254,7 +256,7 @@
         <h4>AutoPDF Builder (2020)</h4>
         <p>This application automates a previously manual time-consuming task by converting web pages into bilingual PDF files. It reads URLs from a spreadsheet and processes each one through the following steps:</p>
         <ul>
-          <li>Loads the web page and prepares it for printing by expanding all collapsible elements (&lt;details&gt; tags), ensuring that all content is visible</li>
+          <li>Loads the web page and prepares it for printing by expanding all collapsible elements (<code>&lt;details&gt;</code> tags), ensuring that all content is visible</li>
           <li>Removes non-essential elements like breadcrumb navigation and archived notices to produce a cleaner and more focused print output</li>
           <li>Automatically configures the browser's print settings (e.g., layout, margins, headers/footers) to ensure consistent PDF formatting</li>
           <li>Saves the English version of the page as a PDF, then switches to the corresponding French page to repeat the preparation and PDF conversion steps, producing a bilingual counterpart</li>
@@ -328,10 +330,10 @@
         <h4>TableNote (2021)</h4>
         <p>This tool simplifies the process of adding footnotes to your HTML tables by automatically generating and formatting them. It offers an efficient solution for numbering footnotes, applying symbols, and managing multi-referenced footnotes. Features overview:</p>
         <ul>
-          <li>Generates footnotes wrapped in &lt;sup&gt; tags</li>
+          <li>Generates footnotes wrapped in <code>&lt;sup&gt;</code> tags</li>
           <li>Processes numbers sequentially followed by symbols</li>
           <li>Supports multi-referenced footnotes</li>
-          <li>Automatically retrieves and pre-fills the table ID from the &lt;caption&gt;</li>
+          <li>Automatically retrieves and pre-fills the table ID from the <code>&lt;caption&gt;</code></li>
           <li>Dynamically toggles between English and French instantly updating markup upon selection</li>
           <li>Creates a dedicated footnotes section below the table</li>
         </ul>
@@ -355,6 +357,13 @@
   window.addEventListener('DOMContentLoaded', () => {
     showItem('default');  // replace 'default' with your actual default item id
   });
+
+  document.querySelectorAll('.toc a').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.toc a').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
   </script>
 </div>
 
