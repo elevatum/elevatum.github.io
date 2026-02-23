@@ -36,26 +36,22 @@
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin: 0;
-      margin-top: -5px;
+      margin: 0 auto;
+      font-weight: 600;
       font-family: 'Baloo 2', sans-serif;
       line-height: 1.1;
-      color: #4d545d;
+      color: #fff;
+
+      font-size: 2rem;
+      max-width: 89%;
+      position: relative;
+      top: 20px;
     }
 
     h2, h3, h4 {color: #f4d0bc; font-size: 14pt;}
     h4 {color: #ab826b;margin-top: 18px;}
 
-    p.tagline {
-      margin: 0 0 3rem 0;           /* remove extra space */
-      font-size: 21px;
-      xcolor: #bfaeff;
-      font-style: italic;
-      line-height: 1;display:none;
-    }
-
-    span { xcolor: #7bbbff; }
+    span { color: #f4d0bc; }
 
     a { color: #36394a; text-decoration: none; cursor: pointer; }
     a:hover { text-decoration: underline; }
@@ -64,10 +60,10 @@
 
     /* --- 3-part layout --- */
     .horizontal-panel {
-      xbackground: #1e293b;
-      xpadding: 1rem 2rem;
       margin-bottom: 2rem;
     }
+
+    .horizontal-panel p { margin-top: 0px; }
 
     .content-wrapper {
       display: flex;
@@ -77,7 +73,6 @@
     .toc {
       flex: none;
       width: auto;
-      white-space: nowrap;
       background: #33373c;
       padding: 0 1rem;
       border-radius: 8px;
@@ -91,6 +86,7 @@
       padding: 0 1rem;
       border-radius: 8px;
       min-height: 200px;
+      box-shadow: 2px 6px 14px #ab846e;
     }
 
     /* Hide all items initially */
@@ -108,9 +104,9 @@
 </head>
 <body>
 
-  <div class="content">
   <h1>elev<span>atum</span></h1>
-  <p class="tagline"><em>where code takes flight</em></p>
+
+  <div class="content">
 
   <div class="horizontal-panel">
 
