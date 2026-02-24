@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Baloo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"><!-- GLightbox CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" /><!-- GLightbox JS -->
@@ -50,7 +50,7 @@
       top: 20px;
     }
 
-    h2, h3, h4 {color: #f4d0bc; font-size: 14pt; font-weight: 600;}
+    h2, h3, h4 {color: #fff; font-size: 14pt; font-weight: 300;}
     h4 {color: #626c7e;margin-top: 18px;font-weight: 700;}
 
     span { color: #f4d0bc; }
@@ -87,11 +87,13 @@
       top: 20px;
       padding: 1px 0; /* Small padding to prevent margin collapse */
       max-height: calc(100vh - 40px);
-      overflow-y: auto;
+      overflow-y: auto;      
     }    
 
-    .toc ul, .toc a {color: white;}
-    .toc a.active {color: #f4d0bc; pointer-events: none; text-decoration: none; cursor: default; }
+    .toolset {color:#f4d0bc;border-bottom: 1px solid #7f6c62;padding-bottom: 5px;font-weight: 500;}
+
+    .toc ul, .toc a {color: #f4d0bc;}
+    .toc a.active {color: #ff8d8d; pointer-events: none; text-decoration: none; cursor: default; }
 
     .item-display {
       flex: 2;
@@ -108,7 +110,7 @@
       display: none;
     }
 
-    sup { color: #f4d0bc; font-size: 12px;}
+    sup { color: #fff; font-size: 12px;}
     code { color: #33373c; font-size: 14px; background:#ffe7da; border-radius: 4px; padding: 2px 4px;}
     
     .fig-thumb {
@@ -243,7 +245,8 @@
     <!-- TOC -->
     <div class="toc">
     <div class="toc-content">
-      <h3>Jira Ecosystem  <i class="fas fa-home" style="float:right; cursor:pointer;" onclick="showItem('default')"></i></h3>
+      <h2 class="toolset">Production Toolset  <i class="fas fa-home" style="float:right; cursor:pointer;" onclick="showItem('default')"></i></h2>
+      <h3>Jira Ecosystem</h3>
       <ul>
         <li><a onclick="showItem('workload')">Workload Distribution</a> <sup>2026</sup></li>
         <li><a onclick="showItem('jira')">JIRA SyncFlow</a> <sup>2026</sup></li>
