@@ -78,7 +78,17 @@
       background: #33373c;
       padding: 0 1rem;
       border-radius: 8px;
+      position: relative; /* Keep background in normal flow */
+      overflow: visible; /* Allow sticky content to extend */
     }
+
+    .toc-content {
+      position: sticky;
+      top: 20px;
+      padding: 1px 0; /* Small padding to prevent margin collapse */
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }    
 
     .toc ul, .toc a {color: white;}
     .toc a.active {color: #f4d0bc; pointer-events: none; text-decoration: none; cursor: default; }
@@ -232,6 +242,7 @@
 
     <!-- TOC -->
     <div class="toc">
+    <div class="toc-content">
       <h3>Jira Ecosystem  <i class="fas fa-home" style="float:right; cursor:pointer;" onclick="showItem('default')"></i></h3>
       <ul>
         <li><a onclick="showItem('workload')">Workload Distribution</a> <sup>2026</sup></li>
@@ -255,6 +266,7 @@
         <li><a onclick="showItem('tablesync')">TableSync Mirror</a> <sup>2024</sup></li>
         <li><a onclick="showItem('tablenote')">TableNote</a> <sup>2021</sup></li>
       </ul>
+    </div>
     </div>
 
     <!-- Description / Item Display -->
@@ -598,6 +610,12 @@
 
   <script>
 function showItem(id) {
+  
+  // Scroll to top of the page
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // Optional: adds smooth scrolling animation
+  });
 
   // 1. Hide all items
   document.querySelectorAll('.item')
