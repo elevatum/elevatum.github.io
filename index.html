@@ -819,14 +819,6 @@
 .hero-border { border: 1px dashed white; border-radius: 30px; padding: 34px; }
 
 
-
-
-
-
-
-
-
-
 /********************************************* Glightbox START */
 
 
@@ -853,36 +845,10 @@
       color: #4d5a77;
     }    
 
-/*
-    .glightbox-clean .gdesc-inner {
-        padding: 0px 20px;
-        position: relative;
-        top: -22px;
-        height: 20px;
-    }
-
-    .glightbox-container img {
-      border: 21px solid white;
-      box-sizing: border-box;
-      border-radius: 6px 6px 0 0;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-*/
 /********************************************* Glightbox END */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/********************************************************************************************************* RESPONSIVE */
 
 /* ===== TABLET (900px - 1200px) ===== */
 @media (min-width: 900px) and (max-width: 1200px) {
@@ -933,11 +899,12 @@
 /* ===== MOBILE (under 900px) ===== */
 @media (max-width: 899px) {
 
-  .top-bar .container { padding: 1rem; }
+  .top-bar .container { padding: 1rem; display: block; }
   .project-wrapper { padding: 0; }
   .project-detail.active { border-radius: 0; padding: 20px; }
   .zero-badge { font-size: 1.7em; margin-bottom: 1rem; }
   .elevateTop { display: none; }
+  .dropbtn { padding: 0.7rem 0.9rem 0 0; }
 
   .hero-section {
     padding: 2rem 1rem;
@@ -1011,6 +978,8 @@
   .row-5-image {
     order: 2;
   }
+
+  .row-6 { display: none; }
 }
 
 /* ===== LARGE MONITOR (1401px and above) ===== */
@@ -1020,16 +989,6 @@
 }
 
 /************************************************************************************************************************************** FINAL LAYOUT END */
-/************************************************************************************************************************************** FINAL LAYOUT END */
-
-
-
-
-
-
-
-
-
 
     /* responsive */
     @media (max-width: 900px) {
@@ -1037,8 +996,6 @@
         grid-template-columns: 1fr;
       }
       
-      .hero-title { font-size: 3.5rem; }
-      .hero-sub { font-size: 1.4rem; }
       .project-detail-header h1 { font-size: 2.5rem; }
       .right-col { position: static; }
     }
