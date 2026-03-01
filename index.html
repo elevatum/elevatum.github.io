@@ -48,9 +48,9 @@
     }
 
     .top-bar .container {
-      max-width: 1120px;
+      max-width: 1150px;
       margin: 0 auto;
-      padding: 1rem 0;
+      padding: 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -86,18 +86,18 @@
       display: flex;
       align-items: center;
       /*gap: 0.75rem;*/
-      flex-wrap: wrap;
+      /*flex-wrap: wrap;*/
     }
 
     .home-btn {
       /*background: white;
       border: 2px solid #e2e8f0;
       border-radius: 40px;*/
-      width: 48px;
+      width: 35px;
       height: 48px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: end;
       font-size: 1.3rem;
       color: #9f73ff;
       text-shadow: 0px 2px 3px #251c3c;
@@ -108,6 +108,128 @@
       border-color: #6C5CE7;
       color: #6C5CE7;
     }
+
+    /* Desktop menu - visible on desktop, hidden on mobile */
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Mobile hamburger - hidden on desktop, visible on mobile */
+    .mobile-hamburger {
+      display: none;
+    }
+
+    .hamburger-icon {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      padding: 0 0.5rem;
+    }
+
+
+/* Mobile slide-out menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 85%;
+  max-width: 400px;
+  height: 100vh;
+  background: #46455f;
+  z-index: 1000;
+  transition: right 0.3s ease;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+  overflow-y: auto;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  position: sticky;
+  top: 0;
+  background: #46455f;
+  z-index: 10;
+}
+
+.mobile-menu-close {
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.mobile-home-btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #9f73ff;
+  cursor: pointer;
+}
+
+.mobile-category {
+  font-family: 'Montserrat';
+  padding: 1rem 1rem 0.5rem;
+  color: #d19cdb;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #271e3d; 
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
+
+.mobile-category:first-of-type {
+  margin-top: 0;  /* ADD THIS LINE */
+}
+
+.mobile-item {
+  padding: 0.8rem 1rem;
+  color: #d0b7fffa;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.mobile-item:hover {
+  background: #34304e;
+}
+
+.mobile-year {
+  color: #a2a2b6;
+  font-size: 0.85rem;
+}
+
+
+
+
+
+
+
+    /* Mobile styles - hide desktop menu, show hamburger */
+    @media (max-width: 899px) {
+      .logo { font-size: 1.5rem; }
+      .nav { flex-wrap: wrap; }
+      .desktop-menu { display: none; }      
+      .mobile-hamburger {  display: block; }
+    }    
 
     .dropdown {
       position: relative;
@@ -899,7 +1021,7 @@
 /* ===== MOBILE (under 900px) ===== */
 @media (max-width: 899px) {
 
-  .top-bar .container { padding: 1rem; display: block; }
+  .top-bar .container { padding: 1rem; display: flex; }
   .project-wrapper { padding: 0; }
   .project-detail.active { border-radius: 0; padding: 20px; }
   .zero-badge { font-size: 1.7em; margin-bottom: 1rem; }
@@ -1009,17 +1131,61 @@
   <div class="top-bar">
     <div class="container">
       <div class="logo"><span class="logo-dots" aria-hidden="true">&#8278;</span>elev<span>atum</span></div>
+
       <div class="nav">
-        <!-- ALL dropdown -->
-        <div class="dropdown" id="allDropdown">
-          <div class="dropbtn">Production Toolkit<i class="fas fa-chevron-down"></i></div>
-          <div class="dropdown-content" id="allMenu"></div>
+        <!-- Desktop menu (visible on desktop) -->
+        <div class="desktop-menu">
+          <div class="dropdown" id="allDropdown">
+            <div class="dropbtn">Production Toolkit<i class="fas fa-chevron-down"></i></div>
+            <div class="dropdown-content" id="allMenu"></div>
+          </div>
+          
+          <div class="home-btn" id="homeBtn"><i class="fas fa-home"></i></div>
         </div>
         
-        <div class="home-btn" id="homeBtn"><i class="fas fa-home"></i></div>
+        <!-- Mobile hamburger (visible on mobile) -->
+        <div class="mobile-hamburger">
+          <button class="hamburger-icon" id="hamburgerBtn">☰</button>
+        </div>
       </div>
+
     </div>
   </div>
+
+
+  <!-- Mobile slide-out menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="mobile-menu-close" id="mobileMenuClose">✕</div>
+      <div class="mobile-home-btn" id="mobileHomeBtn"><i class="fas fa-home"></i></div>
+    </div>
+    <div class="mobile-menu-content">
+      <!-- Production Toolkit dropdown items will go here -->
+      <div class="mobile-category">Jira Ecosystem</div>
+      <div class="mobile-item" data-project="workload">Workload Distribution <span class="mobile-year">2026</span></div>
+      <div class="mobile-item" data-project="syncflow">JIRA SyncFlow <span class="mobile-year">2026</span></div>
+      
+      <div class="mobile-category">Document Conversion & Accessibility</div>
+      <div class="mobile-item" data-project="docprep">DocPrep <span class="mobile-year">2026</span></div>
+      <div class="mobile-item" data-project="xmlmorph">XML Morph <span class="mobile-year">2023</span></div>
+      <div class="mobile-item" data-project="codebot">CodeBOT <span class="mobile-year">2020</span></div>
+      <div class="mobile-item" data-project="autopdf">AutoPDF Builder <span class="mobile-year">2020</span></div>
+      <div class="mobile-item" data-project="flashconv">Flash-Conv <span class="mobile-year">2019</span></div>
+      <div class="mobile-item" data-project="flashcode">Flash-Code <span class="mobile-year">2019</span></div>
+      
+      <div class="mobile-category">Table Framework</div>
+      <div class="mobile-item" data-project="tablextract">TableXtract ✦ AI <span class="mobile-year">2025</span></div>
+      <div class="mobile-item" data-project="tablecraft">TableCraft <span class="mobile-year">2024</span></div>
+      <div class="mobile-item" data-project="tablesync">TableSync Mirror <span class="mobile-year">2024</span></div>
+      <div class="mobile-item" data-project="tablenote">TableNote <span class="mobile-year">2021</span></div>
+    </div>
+  </div>
+
+
+
+
+
+
 
   <!-- Hero section - full width -->
 
@@ -2440,6 +2606,61 @@ window.addEventListener('scroll', function() {
     });
   }
 });
+
+
+// Mobile menu functionality
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+const mobileHomeBtn = document.getElementById('mobileHomeBtn');
+
+// Open menu
+if (hamburgerBtn) {
+  hamburgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+  });
+}
+
+// Close menu with X button
+if (mobileMenuClose) {
+  mobileMenuClose.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+  });
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (mobileMenu.classList.contains('open')) {
+    if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+    }
+  }
+});
+
+// Mobile home button functionality
+if (mobileHomeBtn) {
+  mobileHomeBtn.addEventListener('click', () => {
+    // Trigger same action as desktop home button
+    homeBtn.click();
+    // Close mobile menu
+    mobileMenu.classList.remove('open');
+  });
+}
+
+// Make mobile items clickable
+document.querySelectorAll('.mobile-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    const projectId = item.dataset.project;
+    if (projectId) {
+      // Call your existing showProject function
+      showProject(projectId);
+      // Close mobile menu
+      mobileMenu.classList.remove('open');
+    }
+  });
+});
+
+
 
 window.addEventListener('load', function() {
   setTimeout(function() {
