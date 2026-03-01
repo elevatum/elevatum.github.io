@@ -1015,24 +1015,6 @@
           <div class="dropbtn">Production Toolkit<i class="fas fa-chevron-down"></i></div>
           <div class="dropdown-content" id="allMenu"></div>
         </div>
-
-        <!-- JIRA dropdown -->
-        <div class="dropdown" id="jiraDropdown">
-          <div class="dropbtn">Jira <i class="fas fa-chevron-down"></i></div>
-          <div class="dropdown-content" id="jiraMenu"></div>
-        </div>
-
-        <!-- DOCS dropdown -->
-        <div class="dropdown" id="docsDropdown">
-          <div class="dropbtn">Docs <i class="fas fa-chevron-down"></i></div>
-          <div class="dropdown-content" id="docsMenu"></div>
-        </div>
-
-        <!-- TABLES dropdown -->
-        <div class="dropdown" id="tablesDropdown">
-          <div class="dropbtn">Tables <i class="fas fa-chevron-down"></i></div>
-          <div class="dropdown-content" id="tablesMenu"></div>
-        </div>
         
         <div class="home-btn" id="homeBtn"><i class="fas fa-home"></i></div>
       </div>
@@ -2227,9 +2209,9 @@
       ).join('');
     }
 
-    document.getElementById('jiraMenu').innerHTML = buildCategoryMenu('jira', dropdownData[0].items);
-    document.getElementById('docsMenu').innerHTML = buildCategoryMenu('docs', dropdownData[1].items);
-    document.getElementById('tablesMenu').innerHTML = buildCategoryMenu('tables', dropdownData[2].items);
+    //document.getElementById('jiraMenu').innerHTML = buildCategoryMenu('jira', dropdownData[0].items);
+    //document.getElementById('docsMenu').innerHTML = buildCategoryMenu('docs', dropdownData[1].items);
+    //document.getElementById('tablesMenu').innerHTML = buildCategoryMenu('tables', dropdownData[2].items);
 
     // DOM elements
     const heroWrapper = document.getElementById('heroWrapper');
@@ -2243,20 +2225,6 @@
         document.querySelectorAll('.dropdown-content').forEach(d => d.classList.remove('show'));
       }
     });
-
-
-/*
-    // Toggle dropdowns
-    document.querySelectorAll('.dropbtn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const dropdown = btn.closest('.dropdown');
-        const content = dropdown.querySelector('.dropdown-content');
-        document.querySelectorAll('.dropdown-content').forEach(d => { if (d !== content) d.classList.remove('show'); });
-        content.classList.toggle('show');
-      });
-    });
-*/
 
 // Hover dropdowns - shows on hover, hides on leave
 document.querySelectorAll('.dropdown').forEach(dropdown => {
