@@ -1,154 +1,834 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Elevatum</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>elevatum</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Baloo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"><!-- GLightbox CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Baloo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" /><!-- GLightbox JS -->
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-
+  
   <style>
-    body {     
-      font-family: 'Montserrat', sans-serif;
-      background: #151d28; /*#494d60*/
-      color: #081626; 
-      line-height: 1.6;   
-      background-image: url("https://www.transparenttextures.com/patterns/crossword.png");
-      background-image: url("https://www.transparenttextures.com/patterns/redox-01.png");
-      background-image: url("https://www.transparenttextures.com/patterns/subtle-white-feathers.png");
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    strong {color:#484e5e;}
-
-    .content { border-radius: 16px; background: #f4d0bc; max-width: 85%; margin: 40px auto; padding: 2rem; box-shadow: 3px 9px 21px #000; border: 1px solid #ffffff; }
-    
-    .signature {
-      color: #ffffffb8;
-      max-width: 88%;
-      margin: 0px auto;
-      text-align: right;
-      position: relative;
-      top: -35px;
-      font-size: 14px;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
     }
 
-    h1 {
-      margin: 0 auto;
-      font-weight: 600;
-      font-family: 'Baloo 2', sans-serif;
-      line-height: 1.1;
-      color: #fff;
-
-      font-size: 2rem;
-      max-width: 89%;
-      position: relative;
-      top: 20px;
-    }
-
-    h2, h3, h4 {color: #f4d0bc; font-size: 14pt; font-weight: 300;}
-    h4 {color: #626c7e;margin-top: 18px;font-weight: 700;}
-
-    span { color: #f4d0bc; }
-
-    a { color: #36394a; text-decoration: none; cursor: pointer; }
-    a:hover { text-decoration: underline; }
-    .item a { font-weight: 500; color: #0b1c7a; text-decoration: underline; }
-    .item a:hover { text-decoration: none; }
-
-    /* --- 3-part layout --- */
-    .horizontal-panel {
-      margin-bottom: 2rem;
-    }
-
-    .horizontal-panel p { margin-top: 0px; }
-
-    .content-wrapper {
-      display: flex;
-    }
-
-    .toc {
-      flex: none;
-      width: auto;
-      background: #33373c;
-      padding: 0 1rem;
-      border-radius: 8px 0 0 8px;
-      position: relative; /* Keep background in normal flow */
-      overflow: visible; /* Allow sticky content to extend */
-    }
-
-    .toc-content {
+    /* Top bar - sticky */
+    .top-bar {
       position: sticky;
-      top: 20px;
-      padding: 1px 0; /* Small padding to prevent margin collapse */
-      max-height: calc(100vh - 40px);
-      overflow-y: auto;      
-    }    
-
-    .toolset {color:#ff8d8d;border-bottom: 1px solid #c77373;padding-bottom: 5px;font-weight: 500;}
-
-    .toc ul, .toc a {color: #fff;}
-    .toc a.active {color: #ff8d8d; pointer-events: none; text-decoration: none; cursor: default; }
-
-    .item-display {
-      flex: 2;
-      background: #fff;
-      padding: 0 2.2rem;
-      border-radius: 0 8px 8px 0;
-      min-height: 200px;
-      box-shadow: 6px 6px 14px #ab846e8c;
-      padding-bottom: 20px;
+      top: 0;
+      z-index: 100;
+      background: rgb(39 30 61);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgb(150 99 255);
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .25);
+      width: 100%;
+      transition: all 1s ease;;
     }
 
-    /* Hide all items initially */
-    .item {
+    .top-bar.scrolled { 
+      background: rgb(39 30 61 / 80%); 
+      background-image: url("https://www.transparenttextures.com/patterns/egg-shell.png");
+      border-bottom-color: #6c4996;
+      box-shadow: 0px 4px 18px 5px rgb(40 34 55 / 75%);
+    }
+
+    .top-bar .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 600;
+      font-family: 'Baloo 2';
+      color: white;
+      text-shadow: 0px 0px 3px #000;
+    }
+
+    .logo-dots {
+      transform: rotate(90deg);
+      display: inline-block;
+      margin-right: 7px;
+      color: #ffffff !important;
+      position: relative;
+      top: 2px;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, #6C5CE7, #00C2CB);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: #7ab0ff;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      /*gap: 0.75rem;*/
+      flex-wrap: wrap;
+    }
+
+    .home-btn {
+      /*background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 40px;*/
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: #9f73ff;
+      text-shadow: 0px 2px 3px #251c3c;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .home-btn:hover {
+      border-color: #6C5CE7;
+      color: #6C5CE7;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      /*background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 40px;
+      min-width: 120px;*/
+      padding: 0.7rem 1rem;
+      font-weight: 500;
+      font-size: 1rem;
+      color: #334155;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      justify-content: space-between;
+      color: white;
+    }
+    .dropbtn i {
+      font-size: 0.9rem;
+      color: #b390ff;
+      text-shadow: 0px 2px 1px #1f1934;
+    }
+    .dropbtn:hover {
+      border-color: #6C5CE7;
+    }
+
+    /* Rotate chevron when dropdown is open */
+    .dropdown:hover .dropbtn i {
+      transform: rotate(180deg);
+      transition: transform 0.2s ease;
+    }
+
+    /* Default state */
+    .dropbtn i {
+      transition: transform 0.4s ease;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      background: white;
+      min-width: 260px;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 20px 30px -10px rgb(12 11 21 / 30%);
+      outline: 2px solid rgba(108, 92, 231, 0.15);
+      z-index: 200;
+      top: 67px;
+      background: #46455f;
+      color: #d0b7fffa;
+      overflow: hidden;
+    }
+
+    .dropdown-content.scrolled { background: #4e4661; }
+    .dropdown-content.scrolled .dropdown-item:hover { background: #3b334e; }
+
+    .dropdown-content.show {
+      display: block;
+    }
+
+    .dropdown-item {
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.1s;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      color: #334155;
+      color: #d0b7fffa;
+    }
+    .dropdown-item:hover {
+      /*color: #fff;*/
+      background: #34304e;
+    }
+    .dropdown-item .year {
+      color: #a2a2b6;
+      font-size: 0.85rem;
+    }
+
+    /*
+    .dropdown-item:hover .year {
+      color: #fff;
+    }*/
+
+    .dropdown-cat {
+      font-family: 'Montserrat';
+      line-height: 1.4;
+      padding: 0.3rem 1.5rem;
+      letter-spacing: 0.03em;
+      color: #d19cdb;
+      background: #271e3d;
+      pointer-events: none;
+    }
+
+    /* Hero section - FULL WIDTH */
+    .hero-wrapper {
+      width: 100%;
+    }
+/* 
+    .hero-section {
+      width: 100%;
+      background: linear-gradient(to bottom left, rgb(168 164 216 / 50%), rgb(107 165 232 / 50%), rgb(176 112 192 / 60%), rgb(144 136 208 / 50%)), linear-gradient(180deg, #7c9ad3, #314682);
+      padding: 6rem 2rem;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      line-height: 1;
+      font-size: 5.8em;
+      transform: scaleY(0.9);
+    }
+*/
+    .hero-text {
+      font-family: 'Poppins';
+      font-size: 3em;
+    }
+
+    .hero-sub {
+      font-size: 2rem;
+      /*opacity: 0.9;*/
+      margin-bottom: 3rem;
+      font-family: 'Montserrat';
+      position: relative;
+      top: -27px;
+      left: -27px;
+    }
+
+    .hero-image-placeholder {
+      height: 300px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      font-size: 1.5rem;
+      border: 2px dashed rgba(255,255,255,0.4);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Project area - full width */
+    .project-wrapper {
+      width: 100%;
+      background: #f5f7fb;
+      padding: 3rem 2rem;
+    }
+
+    .project-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* All projects hidden by default */
+    .project-detail {
       display: none;
     }
 
-    sup { color: #f4d0bc; font-size: 12px;}
-    code { color: #33373c; font-size: 14px; background:#ffe7da; border-radius: 4px; padding: 2px 4px;}
-    
-    .fig-thumb {
+    .project-detail.active {
       display: block;
-      margin: 40px auto;
-      width: fit-content;
-      max-width: 80%;
-      height: auto;
-      border-radius: 5px;
-      padding: 12px;
-      box-shadow: 0px 0px 19px #565d6d7a;
-      margin-bottom: 0px;
+      background: #ffffff;
+      padding: 30px 40px 40px 40px;
+      border-radius: 36px;
+      box-shadow: 0px 0px 30px #bcc4d580;
     }
 
-    .fig-thumb img {  max-width: 100%; }
+    .project-detail-header {
+      margin-bottom: 2rem;
+    }
 
-    figcaption { font-size: 14px; }
-    .figCap { padding: 8px; background: #ffe7da; border-radius: 4px;}
+    .project-detail-header h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: -0.25rem;
+      color: #334161;
+    }
 
-    .gallery {
+    .header-meta {
       display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      font-size: 1rem;
+      color: #64748b;
+      font-family: 'Montserrat';
+      padding-left: 3px;
+    }
+
+    .meta-item i {
+      margin-right: 0.5rem;
+      /*color: #6C5CE7;*/
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 2rem;
+    }
+
+    .description ul { margin-left: 3rem; margin-top: 1rem; }
+    .description ul li { margin-bottom: .5rem; }
+    .description strong { color: #4b596d; }
+
+    .elvt-link { text-decoration: underline; color: #2742b7; cursor: pointer; font-weight: 500; }
+    .elvt-link:hover { text-decoration: none; }
+    code { color: purple; }
+
+    .gallery-section {
+      margin: 2rem 0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      background: #f5f7fb;
+      padding: 14px;
+    }
+
+    .gallery-img {
+      width: 100%;
+      /*border-radius: 24px;
+      border: 2px solid #e2e8f0;
+      margin-bottom: 1rem;*/
+    }
+
+    .gallery-caption {
+      font-size: 0.95rem;
+      color: #475569;
+      /*margin-bottom: 1rem;
+      padding: 0.5rem 0;*/
+    }
+
+    .gallery-links {
+      display: flex;
+      gap: 0.75rem;
       flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center; /* center thumbnails */
-      margin-bottom: 1rem;
+      margin: 1rem 0;
     }
 
-    .gallery img {
-      width: 120px;
-      height: auto;
-      border-radius: 6px;
+    .gallery-link {
+      padding: 0.4rem 1.2rem;
+      background: #f1f5f9;
+      border-radius: 40px;
+      color: #334155;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: all 0.2s;
+      color: white;
+      font-family: 'Montserrat';
+    }
+
+    .gallery-link:hover {
+      background: #6C5CE7;
+      color: white;
+    }
+
+    .zero-badge {
+      color: #a0a8b7;
+      margin: 1.5rem 0;
+      font-family: 'Poppins';
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: -3px;
+      line-height: 1;
+      font-size: 3.7em;
+      transform: scaleY(0.9);
+    }
+
+    .youtube-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #343c4c;
+      color: white;
+      padding: 0.7rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: 1rem;
+      font-weight: 200;
+    }
+
+    .txt-live { margin-left: 12px; background: #369aa0; }
+    .txt-live:hover { background: #187a80 !important; }
+
+    .youtube-btn:hover { background: #000; }
+
+    .right-col {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .features {
+      background: #f5f7fb;
+      border-radius: 24px;
+      padding: 2rem;
+    }
+
+    .features-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .features-header h3 {
+      margin-bottom: 0;
+      background: linear-gradient(135deg, #6C5CE7, #00C2CB);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .expand-all-icon {
+      color: #6C5CE7;
       cursor: pointer;
-      box-shadow: 1px 3px 6px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      transition: transform 0.3s;
+      font-size: 1.2rem;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
+    .expand-all-icon.expanded {
+      transform: rotate(180deg);
     }
+
+    .right-col h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #6C5CE7, #00C2CB);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .capabilities-list {
+      list-style: none;
+    }
+
+    .cap-item {
+      border-top: 2px solid #e2e8f0;
+      padding: 0.75rem 0;
+    }
+
+    .cap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .cap-header i {
+      color: #6C5CE7;
+      transition: transform 0.3s;
+    }
+
+    .cap-header.open i {
+      transform: rotate(180deg);
+    }
+
+    .cap-description {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding-left: 0.5rem;
+    }
+
+    .cap-description.show {
+      max-height: 200px;
+      margin-top: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+
+    .jwd-btn { background: #a8aeba !important; } 
+    .jwd-btn:hover { background: #838c9f !important; } 
+
+    .dp-btn { background: #8da8bd  !important; }  
+    .dp-btn:hover { background: #6e8ba2 !important; } 
+
+    .cb-btn { background: #8d83d8 !important; }  
+    .cb-btn:hover { background: #796fc0 !important; }  
+
+    .xml-btn { background: #759fa8 !important; }  
+    .xml-btn:hover { background: #507a83 !important; }  
+
+    .tx-btn { background: #9881b8 !important; }  
+    .tx-btn:hover { background: #7c679a !important; }  
+
+    .fc-btn { background: #ff8888 !important; }   
+    .fc-btn:hover { background: #e77070 !important; }    
+
+    .tsk { 
+      display: inline-block;
+      padding: 0.25em 0.75em;
+      margin: 0.125em 0.25em;
+      font-size: 0.875rem;
+      background-color: #eeeffa; 
+      border-left: 4px solid #9aa8c2;  
+      color: #334161;              
+      border-radius: 2px;  
+      margin-top: 18px;
+    }
+
+
+    .zero-blue {
+       background: linear-gradient(to bottom, #8494a2 25%, rgb(94 109 130) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .card {
+  background: transparent;
+  border-radius: 24px;  /* rounded corners */
+  overflow: hidden;      /* keeps image corners rounded */
+  box-shadow: 0 10px 25px -8px rgba(108, 92, 231, 0.15);
+  border: 2px solid rgb(255 255 255 / 28%);
+  transition: all 0.2s ease;
+  height: 450px;
+  max-width: 65%;
+  flex: 1 1 400px; /* Allows cards to grow */
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -10px rgba(108, 92, 231, 0.3);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+.card-image {
+  width: 100%;
+  overflow: hidden;      /* keeps image within rounded corners */
+  border-bottom: 2px solid rgba(108, 92, 231, 0.1);
+  background: #f8fafc;
+  position: relative;
+  top: 36px;
+  left: 23%;
+}
+
+.card-image img {
+  XXXwidth: 100%;
+  height: 100%;
+  object-fit: cover;     /* covers area without distortion */
+  object-position: center; /* change per image: left, right, top, bottom, or % */
+  display: block;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+
+/***************************************************************************************************************************************/
+/* Your card-image positioning is correct for cropping */
+
+
+
+/* Fix the flex container */
+.hero-content .flex-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; /* Makes cards equal height */
+}
+
+
+
+
+
+
+
+
+
+
+/************************************************************************************************************************************** FINAL LAYOUT START */
+
+/************************************************************************************************************************************** FINAL LAYOUT START */
+
+/* Hero section - FULL WIDTH */
+.hero-wrapper {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.hero-section {
+  width: 100%;
+  background: linear-gradient(to bottom left, rgb(168 164 216 / 50%), rgb(107 165 232 / 50%), rgb(176 112 192 / 60%), rgb(144 136 208 / 50%)), linear-gradient(180deg, #7c9ad3, #314682);
+  padding: 2rem 2rem;
+  color: white;
+  min-height: 100vh;
+}
+
+/* ROW 2 */
+.row-2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.row-2-image {
+  flex: 0 0 auto;
+  margin-left: -3%;
+  z-index: 3;
+}
+
+.row-2-image img {
+  width: 55vw;
+  height: auto;
+  display: block;
+}
+
+.row-2-title {
+  flex: 0 0 auto;
+  margin-left: -23vw;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.row-2-title h1 {
+  font-size: 5.8rem;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1;
+  transform: scaleY(0.9);
+  color: white;
+  margin: 0;
+  user-select: none;
+}
+
+.row-2-title .second-line {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-left: 1.45em;
+}
+
+.row-2-title h1 span {
+  background: linear-gradient(135deg, #ffbb8c, #ffb8fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+/* ROW 3 */
+.row-3 {
+  width: 87%;
+  margin: 0 auto;
+  display: none;
+}
+
+.row-3 h2 {
+  font-size: 3.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: white;
+  margin: 3rem 0;
+}
+
+/* ROW 4 */
+.row-4 {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  width: 80%;
+  margin: 5rem auto;
+}
+
+.row-4-image {
+  flex: 1;
+}
+
+.row-4-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  outline: 2px ridge #3ebcef;
+  box-shadow: 1px 7px 33px #25354e;
+  display: block;
+}
+
+.row-4-text {
+  flex: 1;
+  line-height: 1;
+  font-family: 'Montserrat';
+  font-size: 3.2rem;
+  user-select: none;
+}
+
+.row-4-text .intro {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  font-family: 'Poppins';
+  font-weight: 300;
+}
+
+/* ROW 5 */
+.row-5 {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 6em;
+}
+
+.row-5-text {
+  flex: 1;
+  line-height: 1.2;
+  font-family: 'Montserrat';
+  font-size: 3.5rem;
+  font-weight: 700;
+  position: relative;
+  left: 1em;
+  user-select: none;
+}
+
+.row-5-image {
+  flex: 1;
+}
+
+.row-5-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  outline: 2px ridge #2c928e;
+  box-shadow: 0px 20px 29px #3d2c5d;
+  display: block;
+}
+
+/* ROW 6 */
+.row-6 {
+  height: 290px;
+  overflow: hidden;
+  margin-bottom: 0px;
+}
+
+.elevate {
+  font-size: 24em;
+  font-family: 'Baloo 2';
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0;
+  position: relative;
+  top: -112px;
+  background: linear-gradient(to bottom, #ffffff1c 0%, rgb(255 255 255 / 0%) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+.elevateTop {
+  font-size: 14em;
+  font-family: 'Baloo 2';
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0;
+  position: relative;
+  top: 3rem;
+  left: 18rem;
+  background: linear-gradient(to bottom, #ffffff1c 0%, rgb(255 255 255 / 0%) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+.hero-border { border: 1px dashed white; border-radius: 30px; padding: 34px; }
+
+
+
+
+
+
+
+
+
+
+/********************************************* Glightbox START */
+
 
     a.glightbox { text-decoration: none; }
 
@@ -164,23 +844,16 @@
       font-size: 14px;
     }
 
-    .dp-btn { background: #6a87a3 !important; font-weight: 500 !important; }  
-    .dp-btn:hover { background: #98aabc !important; } 
-
-    .cb-btn { background: #438986 !important; font-weight: 500 !important; }  
-    .cb-btn:hover { background: #346a68 !important; }  
-
-    .xml-btn { background: #799ba2 !important; font-weight: 500 !important; }  
-    .xml-btn:hover { background: #628d96 !important; }  
-
-    .tx-btn { background: #9881b8 !important; font-weight: 500 !important; }  
-    .tx-btn:hover { background: #7c679a !important; }  
-
-    .fc-btn { background: #ffcdcd !important; color: #3b404b !important; font-weight: 500 !important; }  
-    .fc-btn:hover { background: #ffbebe !important; }  
-
     a.glightbox-link:hover { background: #858d93; }  
+    .glightbox-container img { background: white; border-radius: 10px 10px 0 0; }
 
+    .glightbox-clean .gslide-title {
+      margin: 0;
+      font-family: 'Montserrat';
+      color: #4d5a77;
+    }    
+
+/*
     .glightbox-clean .gdesc-inner {
         padding: 0px 20px;
         position: relative;
@@ -194,457 +867,1670 @@
       border-radius: 6px 6px 0 0;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
+*/
+/********************************************* Glightbox END */
 
-    .yt-watch {
-      text-decoration: none !important;
-      color: #ffffff !important;
-      float: right;
-      font-size: 9pt;
-      padding: 6px 10px;
-      border-radius: 6px;
-      position: relative;
-      background: #546676; /*#67737e*/
-      top: -4px;
-      margin-left: 0.5em;
-    }
 
-    .yt-watch:hover { background: #dd2a2a;}
 
-    .yt-watch i {     
-      color: #ffffff;
-      font-size: 13pt;
-      position: relative;
-      top: 2px;
-    }
 
-    /* Mobile layout */
-    @media (max-width: 768px) {
-      .content-wrapper {
-        flex-direction: column;
-      }
-    }
-  </style>
-</head>
-<body>
 
-  <h1>elev<span>atum</span> &#8278;</h1>
 
-  <div class="content">
 
-  <div class="horizontal-panel">
 
-  <!--<h2>Portfolio Overview</h2>-->
 
-  <p>A portfolio of custom-built tools and utilities for web and desktop platforms that address real-world production challenges. These applications enhance content workflows, maintain accessibility standards, and generate tangible operational improvements. Each solution demonstrates the translation of practical problems into scalable, production-grade systems.</p>
 
-  </div>
 
-  <div class="content-wrapper">
 
-    <!-- TOC -->
-    <div class="toc">
-    <div class="toc-content">
-      <h2 class="toolset">Production Toolset  <i class="fas fa-home" style="float:right; cursor:pointer;" onclick="showItem('default')"></i></h2>
-      <h3>Jira Ecosystem</h3>
-      <ul>
-        <li><a onclick="showItem('workload')">Workload Distribution</a> <sup>2026</sup></li>
-        <li><a onclick="showItem('jira')">JIRA SyncFlow</a> <sup>2026</sup></li>
-      </ul>
 
-      <h3>Document &amp; Accessibility Automation</h3>
-      <ul>
-        <li><a onclick="showItem('docprep')">DocPrep</a> <sup>2026</sup></li>
-        <li><a onclick="showItem('xmlmorph')">XML Morph</a> <sup>2023</sup></li>
-        <li><a onclick="showItem('codebot')">CodeBOT</a> <sup>2020</sup></li>
-        <li><a onclick="showItem('autopdf')">AutoPDF Builder</a> <sup>2020</sup></li>
-        <li><a onclick="showItem('flashconv')">Flash-Conv</a> <sup>2019</sup></li>
-        <li><a onclick="showItem('flashcode')">Flash-Code</a> <sup>2019</sup></li>
-      </ul>
 
-      <h3>Table Automation Framework</h3>
-      <ul>
-        <li><a onclick="showItem('tablextract')">TableXtract ✦ AI-Powered</a> <sup>2025</sup></li>
-        <li><a onclick="showItem('tablecraft')">TableCraft</a> <sup>2024</sup></li>
-        <li><a onclick="showItem('tablesync')">TableSync Mirror</a> <sup>2024</sup></li>
-        <li><a onclick="showItem('tablenote')">TableNote</a> <sup>2021</sup></li>
-      </ul>
-    </div>
-    </div>
 
-    <!-- Description / Item Display -->
-    <div class="item-display">
-
-      <div id="default" class="item" style="text-align: center;">
-        <p>Check out the <a href="https://www.youtube.com/@elevatumdev">elevatum YouTube channel</a> to see these apps in action!</p>
-        
-        <iframe width="850" height="450" src="https://www.youtube.com/embed/QWvQmaOP_jg?si=svVLvGAwfifaMrMm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        
-      </div>
-      
-      <!-- Jira Ecosystem -->
-      <div id="workload" class="item">
-
-        <h4>Workload Distribution (2026)</h4>
-
-        <p>A real‑time dashboard that extracts and visualizes team workload directly from a Jira project view. It consolidates paginated ticket data into a single interactive panel, providing instant visibility into how work is distributed across the team and who has available capacity.</p>      
-
-        <figure class="fig-thumb">
-          <a href="assets/jwd/progress.png" class="glightbox" data-title="<strong>Team Cpacity Visualization</strong> — who is currently busy working on a ticket, who has availability, and overall workload distribution">
-            <img src="assets/jwd/progress.png" alt="">
-          </a>
-          <figcaption><strong>Team capacity visualization</strong> — who is currently busy working on a ticket, who has availability, and overall workload distribution</figcaption>
-        </figure>    
-
-        <!-- Gallery Thumbnails -->
-        <div class="gallery">
-        <p><strong>View gallery:</strong>
-          <a href="assets/jwd/assign.png" class="glightbox glightbox-link" data-title="<strong>Tickets Awaiting Assignment</strong> — displays unassigned items in the queue and team members availability">availability</a>
-          <a href="assets/jwd/progress-2.png" class="glightbox glightbox-link" data-title="<strong>Dynamic Metrics</strong> — toggle between counts and percentages to visualize overall team workload">metrics</a>
-          <a href="assets/jwd/filter.png" class="glightbox glightbox-link" data-title="<strong>Filtered View</strong> — only tickets for the selected status are displayed, providing a clear snapshot of workload">filter</a></p>
-        </div>
-
-        <p>Core capabilities:</p>
-
-        <ul>
-          <li><strong>Unified data view:</strong> automatically aggregates tickets from across paginated tables, presenting every team member and their current assignments in one place, eliminating the need to click through multiple pages or manually track counts</li>
-          <li><strong>Team capacity indicators:</strong> color‑coded stats immediately reveal who is busy and who has workload availability, turning raw ticket data into actionable insight</li>
-          <li><strong>One‑click person filtering:</strong> click any team member's name to instantly isolate their tickets in the main table, ideal for quick progress checks without manual searching</li>
-          <li><strong>Status‑based navigation:</strong> toggle between workflow stages via dedicated buttons, each showing the total ticket count for that status to maintain context while switching views</li>
-          <li><strong>Dynamic workload metrics:</strong> switch between raw ticket counts and percentage‑of‑status distribution to understand both absolute volume and relative team share</li>
-          <li><strong>Focused team scope:</strong> displays data exclusively for team members, excluding unrelated assignees to ensure the dashboard always reflects your actual team composition</li>
-          <li><strong>Interactive data table:</strong> sort any column with a single click; headers stay visible while scrolling</li>
-        </ul>
-
-        <p><strong>✓ Zero infrastructure:</strong> no installation, no backend dependencies, no system admin approvals</p>
-      </div>
-
-      <div id="jira" class="item">
-        <h4>JIRA SyncFlow (2026)</h4>
-        <p>This tool centralizes an existing, multi-step ticketing workflow into a single interface. It accelerates the JIRA review and pre-approval stages by reducing context switching, guiding key decision points, and supporting accurate, consistent communications. It requires no backend services or environment setup.</p>
-
-        <figure class="fig-thumb" style="max-width: 50%;">
-          <a href="assets/jsf/jsf-progress.png" class="glightbox">
-            <img src="assets/jsf/jsf-progress.png" alt="">
-          </a>
-          <figcaption class="figCap"><strong>Consolidated view</strong> — shows all components in one interface, including ticket status, estimated completion date, overdue indicators, and assigned reviewers/strategists, streamlining task tracking and reducing workflow friction</figcaption>
-        </figure>        
-        
-        <p>Operational enhancements:</p>
-
-        <ul>
-          <li><strong>Consolidated workspace:</strong> eliminates the need to search across multiple sections of a ticket and navigate multiple platforms (Jira, Outlook, and AEM)</li>
-          <li><strong>Workflow friction reduction:</strong> removes unnecessary steps by integrating multiple tasks into a single interface, helping move tickets through review and approval stages faster</li>
-          <li><strong>Adaptive workflow guidance:</strong> detects the current ticket status and suggests the appropriate transition action, including safe rollback options when reversions are required</li>
-          <li><strong>Status timer indicator:</strong> shows how long a ticket has remained in its current stage, providing immediate insight into issues that are stalled, delayed, or overdue</li>
-          <li><strong>One-click page access:</strong> opens all listed staging URLs instantly, either in the AEM editor or preview environment, without copying links individually or switching platforms</li>
-          <li><strong>Email draft generator:</strong> pre-fills recipients, subject lines, and relevant URLs, letting users switch between preview links for client approval or live links for final distribution</li>
-        </ul>
-
-        <p><strong>✓ Zero infrastructure:</strong> no installation, no backend dependencies, no system admin approvals <a href="https://www.youtube.com/watch?v=2iAD4hLbbHs" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a></p>
-          
-      </div>
-
-      <!-- Document & Accessibility Automation -->
-      <div id="docprep" class="item">
-        <h4>DocPrep (2026)</h4>
-        <p>An application that provides pre-production analysis of Microsoft Word documents, identifying accessibility and structural issues while delivering actionable diagnostics through automated validation and accessibility scoring.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/dp/dp.jpg" class="glightbox" data-title="<strong>Automated Issue Detection</strong> — scans the document for accessibility, structure, formatting, and link integrity problems, categorizing findings by priority with a live accessibility score">
-            <img src="assets/dp/dp.jpg" alt="">
-          </a>
-          <figcaption><strong>Automated issue detection</strong> — scans the document for accessibility, structure, formatting, and link integrity problems, categorizing findings by priority with a live accessibility score</figcaption>
-        </figure>    
-
-        <!-- Gallery Thumbnails -->
-        <div class="gallery">
-        <p><strong>View gallery:</strong>
-          <a href="assets/dp/dp-issues.jpg" class="glightbox glightbox-link dp-btn" data-title="<strong>Automated Issue Detection</strong> — scans the document for accessibility, structure, formatting, and link integrity problems, categorizing findings by priority with a live accessibility score">issue detection</a>
-          <a href="assets/dp/dp-links.png" class="glightbox glightbox-link dp-btn" data-title="<strong>Parallel Link Validation</strong> — executes URL checks in parallel, preserving full interface responsiveness during document analysis">link validation</a></p>
-        </div>
-        
-        <p>Key Features:</p>
-
-        <ul>
-          <li><strong>Comprehensive accessibility audit:</strong> detects missing alt text, malformed headings and lists, table structure errors, empty and colored background cells, and formatting issues (all caps, underline, italic usage)</li>
-          <li><strong>Smart link verification:</strong> validates external links in real-time, flags local/email links, and identifies same-text-different-URL inconsistencies</li>
-          <li><strong>Document health check:</strong> flags tracked changes and comments that impact diagnostic accuracy</li>
-          <li><strong>Priority-driven workflow:</strong> categorizes fixes by impact (high, medium, low) with detailed counts for each category</li>
-          <li><strong>Accessibility score:</strong> calculates an overall accessibility percentage and provides detailed health metrics for each content category</li>
-          <li><strong>Interactive diagnostic reports:</strong> generates a Word file featuring a TOC with CTRL+clickable links to flagged issues for review and correction</li>
-          <li><strong>Privacy-first analysis:</strong> the entire document is processed locally for security; only URLs are sent externally for link validation</li>
-          <li><strong>Tech stack:</strong> JavaScript, Microsoft Azure Functions (Python), HTML, CSS</li>
-          <li><strong>System Architecture:</strong> see the technical workflow <a href="assets/docprep-diagram.pdf">diagram</a> <a href="https://www.youtube.com/watch?v=FSQRzIO2pcY" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a></li>
-        </ul>
-      </div>
-
-      <div id="xmlmorph" class="item">
-        <h4>XML Morph (2023)</h4>
-        <p>This tool effortlessly transforms well-structured HTML into custom XML format used in <a href="https://www.tbs-sct.canada.ca/pol/index-eng.aspx">TBS policy documents</a>, streamlining the conversion process.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/xml/xm-1.png" class="glightbox" data-title="<strong>UI / Overview</strong> — unified workspace for transforming and structuring XML content, with streamlined controls that simplify editing, formatting, and output management">
-            <img src="assets/xml/xm-1.png" alt="">
-          </a>
-          <figcaption><strong>UI / Overview</strong> — unified workspace for transforming and structuring XML content, with streamlined controls that simplify editing, formatting, and output management</figcaption>
-        </figure>    
-
-        <!-- Gallery Thumbnails -->
-        <div class="gallery">
-        <p><strong>View gallery:</strong>
-          <a href="assets/xml/xm-2.png" class="glightbox glightbox-link xml-btn" data-title="<strong>Toggleable XML Tree Panel</strong> — collapsible XML tree view for structured navigation, enabling quick inspection and precise node-level editing without leaving the main workspace">xml tree toggle</a>
-          <a href="assets/xml/xm-3.png" class="glightbox glightbox-link xml-btn" data-title="<strong>XML & HTML Validation</strong> — real-time structural validation detects malformed tags, hierarchy errors, and formatting issues to ensure clean, standards-compliant output">validation</a>
-        </div>
-
-        <p>Here's a summary of its main functions and behavior:</p>
-
-        <ul>
-          <li><strong>Initial storage:</strong> stores the user's original pasted content so it can be reverted or compared later</li>
-          <li><strong>HTML to XML conversion:</strong> converts HTML into a custom XML format that includes structural elements like chapters, appendices, clauses, and sections. it also adds headers, handles special characters, and replaces standard list tags with more semantic equivalents</li>
-          <li><strong>XML to HTML conversion:</strong> reverses the above process, stripping out XML wrappers and reconstructing readable HTML.</li>
-          <li><strong>List handling:</strong> distinguishes between clause-style lists and normal lists to ensure only the appropriate ones are converted to <code>&lt;clause&gt;</code> elements</li>
-          <li><strong>Section wrapping:</strong> automatically groups headings and their following content into semantic sections based on heading levels</li>
-          <li><strong>Preview and error display:</strong> renders color-coded structured output and displays error messages or a parsed view as needed</li>
-          <li><strong>Cleanup:</strong> removes style elements and ensures self-closing tags are handled correctly</li>
-          <li><strong>Validation:</strong> checks for matching and balanced HTML/XML tags, reporting issues if any tags are unbalanced or improperly structured</li>
-        </ul>
-
-        <a href="https://www.youtube.com/watch?v=Gr9KHV1bIQE&pp=0gcJCaIKAYcqIYzv" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a>
-
-      </div>
-
-      <div id="codebot" class="item">
-        <h4>CodeBOT (2020)</h4>
-        <p>Analytics-driven automated HTML editor that opens Word documents of all sizes while applying the Canadian Standard on Web Accessibility. CodeBOT combines a sequential processing pipeline from core syntax cleanup to content structuring, streamlining the conversion workflow and supporting WCAG compliance.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/cb/cb.png" class="glightbox" data-title="<strong>UI / Overview</strong> — main editor workspace with real-time diagnostics, syntax & accessibility validation, and table accessibility settings in a single interface">
-            <img src="assets/cb/cb.png" alt="">
-          </a>
-          <figcaption><strong>UI / Overview</strong> — main editor workspace with real-time diagnostics, syntax & accessibility validation, and table accessibility settings in a single interface</figcaption>
-        </figure>    
-
-        <!-- Gallery Thumbnails -->
-        <div class="gallery">
-        <p><strong>View gallery:</strong>
-          <a href="assets/cb/cb-links.png" class="glightbox glightbox-link cb-btn" data-title="<strong>Parallel Link Validation</strong> — runs link checks independently and in parallel, displaying live status codes while letting you continue working uninterrupted in the editor">link validation report</a>
-          <a href="/assets/cb/codebot-architecture.png" class="glightbox glightbox-link cb-btn" data-title="<strong>System Architecture</strong> — detailed visual blueprint of the end-to-end processing pipeline, illustrating component interactions, data flow, and automated execution stages">system architecture</a>
-        </div>
-
-        <p>Here are the key features:</p>
-
-        <ul>
-          <li><strong>Syntax cleanup:</strong> removes proprietary Microsoft markup, deprecated attributes, extra spaces, line breaks, and empty tags for cleaner, standards-compliant HTML</li>
-          <li><strong>Dynamic language detection:</strong> applies language-specific formatting to English or French content</li>
-          <li><strong>Content structuring:</strong> builds table of contents, corrects malformed structural elements, encodes images and bilingual footnotes, adds semantic section tags, and formats definition lists</li>
-          <li><strong>Table accessibility:</strong> allows users to navigate each table either directly within the editor or through a modal preview built on a Shadow DOM architecture. It applies proper table markup (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>), sets auto-scope attributes, and enables toggling of basic formatting options</li>
-          <li><strong>URL processing:</strong> decodes Outlook Safe Links, converts absolute URLs to relative paths, and provides a Link Status Report that identifies broken links</li>
-          <li><strong>Analytics and feedback:</strong> provides real-time counts displayed beside each operation, allowing users to immediately see how many instances of specific issues or elements (such as deprecated attributes or footnotes) are present in the HTML. This helps users quickly assess the scope of cleanup and improvements needed</li>
-          <li><strong>Real-time validation:</strong> automatically detects HTML syntax errors, invalid heading hierarchy structure, accessibility errors, and displays them in the console panel, with each message clickable to jump directly to the specific line number</li>
-          <li><strong>Tech stack:</strong> JavaScript, HTML, CSS, CodeMirror 5.65.2, Google Apps Script (serverless backend)</li>
-          <li><strong>System Architecture:</strong> discover the <a href="assets/codebot-diagram.pdf">visual overview</a> illustrating the sequential pipeline and automated processing flow</li>
-        </ul>
-
-        <h4>Modules added since rollout</h4>
-
-        <ul>
-          <li><strong>TableNote Pro (2022):</strong> an enhanced version of <a onclick="showItem('tablenote')">TableNote (2021)</a>, a tool for auto-generating footnotes in HTML tables. It provides new options such as toggling footnotes on or off, visual highlighting to identify and trace footnote references, and the ability to inject the footnote section directly within the table</li>
-          <li><strong>Link Validator (2024):</strong> a utility that runs in parallel yet independently of main editing tasks. It scans all hyperlinks to detect broken, redirected, or malformed URLs and generates a detailed status report complete with visual indicators, copy/export tools, and an HTTP status legend. It features a 3-slot FIFO popup architecture ensuring only the latest reports are visible. Built from scratch, this component can be integrated into other systems with minimal modification</li>
-          <li><strong>Paste from external sources (2025):</strong> this feature expands CodeBOT’s capabilities beyond its original support for .docx files and plain text, allowing users to copy and paste content from a variety of sources (Word, Excel, web pages, Google Sheets, etc.) directly into the editor while preserving structure and formatting</li>
-          <li><strong>Link Validator (2025 – Redesigned):</strong> a fully revamped system featuring a dedicated Link Validation section, Google Sheets export, Outlook email integration, and archive management, streamlining workflow and enhancing user focus</li>
-        </ul>
-         <a href="https://www.youtube.com/watch?v=-A2c1ZdrJO4" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a>
-      </div>
-
-      <div id="autopdf" class="item">
-        <h4>AutoPDF Builder (2020)</h4>
-        <p>This application automates a previously manual time-consuming task by converting web pages into bilingual PDF files. It reads URLs from a spreadsheet and processes each one converting the page to a PDF file.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/apb/apb.png" class="glightbox" data-title="<strong>Browser PDF Automation Pipeline</strong> — processes spreadsheet-based URLs, expands dynamic content, sanitizes layout elements, and generates consistent bilingual PDF outputs">
-            <img src="assets/apb/apb.png" alt="">
-          </a>
-          <figcaption class="figCap"><strong>Browser PDF automation pipeline</strong> — processes spreadsheet-based URLs, expands dynamic content, sanitizes layout elements, and generates consistent bilingual PDF outputs</figcaption>
-        </figure> 
-
-        <p>How it works:</p>
-
-        <ul>
-          <li>Loads the web page and prepares it for printing by expanding all collapsible elements (<code>&lt;details&gt;</code> tags), ensuring that all content is visible</li>
-          <li>Removes non-essential elements like breadcrumb navigation and archived notices to produce a cleaner and more focused print output</li>
-          <li>Automatically configures the browser's print settings (e.g., layout, margins, headers/footers) to ensure consistent PDF formatting</li>
-          <li>Saves the English version of the page as a PDF, then switches to the corresponding French page to repeat the preparation and PDF conversion steps, producing a bilingual counterpart</li>
-          <li><strong>Tech stack:</strong> Python, Selenium WebDriver, ChromeDriver, Chrome browser, JavaScript, Microsoft Excel</li>
-        </ul>
-         <a href="https://www.youtube.com/watch?v=ZizEmOH_jNU" class="yt-watch" style="float:left;">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a>
-      </div>
-
-      <div id="flashconv" class="item">
-        <h4>Flash-Conv (2019)</h4>
-        <p>Batch-driven desktop application that converts Word documents both new and old legacy formats (doc and docx) to clean, valid HTML5, automating a typically tedious manual process common in government departments.</p>        
-
-        <figure class="fig-thumb">
-          <a href="assets/fcn/fcn-50.png" class="glightbox" data-title="<strong>Conversion & Analytics Engine</strong> — processes up to 1,000 DOC/DOCX files in minutes, transforming them into clean, standards-compliant HTML5 while providing complexity analysis, performance metrics, corrupted file recovery, and automated Outlook delivery">
-            <img src="assets/fcn/fcn-50.png" alt="">
-          </a>
-          <figcaption><strong>Conversion & analytics engine</strong> — processes up to 1,000 DOC/DOCX files in minutes, transforming them into clean, standards-compliant HTML5 while providing complexity analysis, performance metrics, corrupted file recovery, and automated Outlook delivery</figcaption>
-        </figure>  
-
-        <p>Key features:</p>
-          
-        <ul>
-          <li><strong>Batch processing:</strong> supports single-file or batch conversion from either a ZIP archive or directory, handling of large volumes with minimal user input</li>
-          <li><strong>Analytics:</strong> uses data science concepts to analyze HTML output by tabulating content, visualizing patterns with graphs, and applying mathematical methods to assess the complexity of the conversion process. This analytical insight helps identify challenges, optimize workflows, and improve overall conversion quality and efficiency</li>
-          <li><strong>Performance metrics:</strong> efficiently processes batches of up to 1,000 files in about 10 minutes with analytics feature enabled, or 2.5 minutes without analytics</li>
-          <li><strong>Corrupted file recovery:</strong> automatically flags and converts damaged files that cannot be opened manually</li>
-          <li><strong>Outlook integration:</strong> results are emailed automatically via Outlook for streamlined delivery</li>
-          <li><strong>Tech stack:</strong> Python, JavaScript, Vue.js, Chart.js, Win32com.client, HTML, CSS, Headless Chrome</li>
-        </ul>
-         <a href="https://www.youtube.com/watch?v=QWvQmaOP_jg" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a>
-      </div>
-
-      <div id="flashcode" class="item">
-        <h4>Flash-Code (2019)</h4>
-        <p>An innovative desktop application designed for Web Publishing tasks. It offers customized automation features that streamline routine publishing tasks, allowing users to work faster and more efficiently than with traditional code editors. Unlike standard tools, Flash-Code provides unique capabilities not found in other editors.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/fc/fc.png" class="glightbox" data-title="<strong>UI / Overview</strong> — desktop workspace for web publishing with batch processing, Word-to-HTML conversion, and Drupal CMS integration for automated content population">
-            <img src="assets/fc/fc.png" alt="">
-          </a>
-          <figcaption><strong>UI / Overview</strong> — desktop workspace for web publishing with batch processing, Word-to-HTML conversion, and Drupal CMS integration for automated content population</figcaption>
-        </figure>    
-
-        <!-- Gallery Thumbnails -->
-        <div class="gallery">
-        <p><strong>View gallery:</strong>
-          <a href="assets/fc/fc-table.png" class="glightbox glightbox-link fc-btn" data-title="<strong>Instant WET4 Integration</strong> — send tables straight to the WET4 Table Validator without leaving Flash‑Code, streamlining web accessibility validation in a single click">WET4 Table Validator</a>
-        </div>
-
-        <p>Here are some features:</p>
-
-        <ul>
-          <li><strong>Instant conversion:</strong> opens Word documents in HTML</li>
-          <li><strong>Batch operations:</strong> runs multiple search-and-replace commands simultaneously</li>
-          <li><strong>Drupal integration:</strong> creates web pages by populating HTML content and access HTML source code without login</li>
-          <li><strong>Table accessibility:</strong> extracts HTML tables for interaction with the WET4 Table Validator, then reintegrates the accessible code into the application</li>
-          <li><strong>Customization:</strong> configures images, lists, inks, and footnotes using built-in tools for consistent formatting</li>
-          <li><strong>Access control:</strong> ensures the application runs only on approved devices and accounts, while detecting and reporting any unauthorized access attempts</li>
-          <li><strong>Platform integration:</strong> Drupal 7, Outlook, WET4 Table Validator</li>
-          <li><strong>Tech stack:</strong> Python, JavaScript, JQuery, Win32com.client, HTML, CSS, Bootstrap 4.3.1, CodeMirror 5.43.0, Headless Chrome</li>
-        </ul>
-      </div>
-
-      <!-- Table Automation Framework -->
-      <div id="tablextract" class="item">
-        <h4>TableXtract (2025)</h4>
-        <p>Cloud-based microservice that converts table images into structured HTML. It accepts binary image uploads, performs server-side OCR and table detection, and returns clean, standardized output ready for downstream automation. The service runs in both local and web-based environments, delivering fast and consistent results. Built as a scalable, serverless component, TableXtract can be easily integrated into existing applications and workflows that require accurate table extraction from screenshots, scans, or other image sources.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/tx/tx-1.png" class="glightbox" data-title="<strong>AI-Powered Table Extraction</strong> — converts uploaded images into structured, editable tables with preserved layout and cell relationships">
-            <img src="assets/tx/tx-1.png" alt="">
-          </a>
-          <figcaption><strong>AI-powered table extraction</strong> — converts uploaded images into structured, editable tables with preserved layout and cell relationships</figcaption>
-        </figure>    
-
-        <!-- Gallery Thumbnails -->
-        <div class="gallery">
-        <p><strong>View gallery:</strong>
-          <a href="assets/tx/tx-2.png" class="glightbox glightbox-link tx-btn" data-title="<strong>Structured HTML Output</strong> — generated, standards-compliant table markup ready for direct integration into web workflows">HTML code view</a>
-        </div>
-
-        <p>Core features:</p>
-
-        <ul>
-          <li><strong>Smart table recognition:</strong> automatically identifies tables and their structure in images using AI-powered analysis</li>
-          <li><strong>Spell check integration:</strong> flags potential spelling errors in extracted text with visual highlighting and suggested corrections</li>
-          <li><strong>Clean HTML output:</strong> produces well-structured, accessible HTML tables ready for direct use or automation</li>
-          <li><strong>Flexible output options:</strong> provides easy ways to copy, download, and preview results, including a code view toggle for developer workflows</li>
-          <li><strong>Drag-and-drop interface:</strong> supports intuitive file uploads with instant preview for common image formats (JPEG, PNG, BMP, GIF)</li>
-          <li><strong>Tech stack:</strong> Microsoft Azure (serverless backend), Python, HTML, JavaScript, CSS</li>
-        </ul>
-
-        <p>Try <a href="https://tablextractstorage.z19.web.core.windows.net/">TableXtract</a> live! <a href="https://www.youtube.com/watch?v=NJcuGlP4PTw" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a></p>
-      </div>
-
-      <div id="tablecraft" class="item">
-        <h4>TableCraft (2024)</h4>
-        <p>Originally designed with financial data in mind, this tool provides a graphical interface for editing and customizing HTML tables. It enables quick styling and structural changes, while also managing accessibility attributes without the need to write HTML code.</p>
-
-        <figure class="fig-thumb">
-          <a href="assets/tc/tc.png" class="glightbox" data-title="<strong>Graphical Table Editor</strong> — real-time HTML table customization with structural controls, accessibility management, and instant visual feedback">
-            <img src="assets/tc/tc.png" alt="">
-          </a>
-          <figcaption class="figCap"><strong>Graphical table editor</strong> — real-time HTML table customization with structural controls, accessibility management, and instant visual feedback</figcaption>
-        </figure>   
-
-        <p>Here's a breakdown of what the application does:</p>
-
-        <ul>
-          <li><strong>Real-time preview:</strong> displays a live preview of your HTML table as you type, showing changes instantly</li>
-          <li><strong>Interactive editing:</strong> users can click directly on table cells, columns, or the caption in the preview to apply changes</li>
-          <li><strong>Flexible operations:</strong> ability to choose from various modes to edit single cells, entire columns, or the caption, and apply styles, structure changes, or accessibility attributes</li>
-          <li><strong>Undo and cleanup:</strong> easily reverse recent modifications or clean up the HTML by removing unnecessary tags or classes</li>
-          <li><strong>Code management:</strong> copy the cleaned HTML to your clipboard or reset the table to its initial state</li>
-        </ul>
-
-         <a href="https://www.youtube.com/watch?v=o0CL_ExgIm8" class="yt-watch">Watch on <i class="fa-brands fa-youtube"></i> YouTube</a>
-      </div>
-
-      <div id="tablesync" class="item">
-        <h4>TableSync Mirror (2024)</h4>
-        <p>This tool easily synchronizes two HTML tables by transferring only the updated content from one table to another, while preserving the original formatting and structure.</p>
-      </div>
-
-      <div id="tablenote" class="item">
-        <h4>TableNote (2021)</h4>
-        <p>This tool simplifies the process of adding footnotes to your HTML tables by automatically generating and formatting them. It offers an efficient solution for numbering footnotes, applying symbols, and managing multi-referenced footnotes. Features overview:</p>
-        <ul>
-          <li>Generates footnotes wrapped in <code>&lt;sup&gt;</code> tags</li>
-          <li>Processes numbers sequentially followed by symbols</li>
-          <li>Supports multi-referenced footnotes</li>
-          <li>Automatically retrieves and pre-fills the table ID from the <code>&lt;caption&gt;</code></li>
-          <li>Dynamically toggles between English and French instantly updating markup upon selection</li>
-          <li>Creates a dedicated footnotes section below the table</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-function showItem(id) {
+/* ===== TABLET (900px - 1200px) ===== */
+@media (min-width: 900px) and (max-width: 1200px) {
+  .row-2 {
+    width: 90%;
+  }
   
-  // Scroll to top of the page
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth' // Optional: adds smooth scrolling animation
-  });
-
-  // 1. Hide all items
-  document.querySelectorAll('.item')
-    .forEach(item => item.style.display = 'none');
-
-  // 2. Show selected
-  const el = document.getElementById(id);
-  if (el) el.style.display = 'block';
-
-  // 3. Clear all active states
-  document.querySelectorAll('.toc a')
-    .forEach(link => link.classList.remove('active'));
-
-  // 4. Activate matching TOC link
-  const activeLink = document.querySelector(`.toc a[onclick="showItem('${id}')"]`);
-  if (activeLink) {
-    activeLink.classList.add('active');
+  .row-2-title h1 {
+    font-size: 4.5rem;
+  }
+  
+  .row-4 {
+    width: 90%;
+    gap: 1.5em;
+  }
+  
+  .row-4-text {
+    font-size: 2.5rem;
+  }
+  
+  .row-5 {
+    width: 90%;
+  }
+  
+  .row-5-text {
+    font-size: 3rem;
   }
 }
 
-  // show default item on page load
-  window.addEventListener('DOMContentLoaded', () => {
-    showItem('default');  // replace 'default' with your actual default item id
-  });
+/* ===== SMALL DESKTOP (1201px - 1400px) ===== */
 
-  </script>
+@media (min-width: 1201px) and (max-width: 1400px) {
+
+  .row-2 { width: 85%; }
+  .row-2-title { margin-top: 1rem; margin-left: -28vw; }
+  .row-2-title h1 { font-size: 4rem; }
+  
+  .row-4 { width: 100%; margin-bottom: 7em; }  
+  .row-4-text { font-size: 2.5rem; }
+  
+  .row-5 { width: 100%; }  
+  .row-5-text { font-size: 3rem; left: 0; }
+
+  .elevate { font-size: 22em; }
+  .elevateTop { font-size: 10em; top: 1rem; left: 15rem; }
+}
+
+/* ===== MOBILE (under 900px) ===== */
+@media (max-width: 899px) {
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+  
+  .row-2 {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  .row-2-image {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .row-2-image img {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .row-2-title {
+    margin-left: 0;
+    margin-top: 0;
+    width: 100%;
+  }
+  
+  .row-2-title h1 {
+    font-size: 3.5rem;
+  }
+  
+  .row-2-title .second-line {
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+  
+  .row-4 {
+    flex-direction: column;
+    width: 100%;
+    margin: 3rem auto;
+    gap: 1.5rem;
+  }
+  
+  .row-4-text {
+    font-size: 2.5rem;
+    order: 1;
+  }
+  
+  .row-4-text .intro {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .row-4-image {
+    order: 2;
+  }
+  
+  .row-5 {
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+  }
+  
+  .row-5-text {
+    font-size: 2.5rem;
+    order: 1;
+  }
+  
+  .row-5-image {
+    order: 2;
+  }
+}
+
+/* ===== LARGE MONITOR (1401px and above) ===== */
+@media (min-width: 1401px) {
+  /* Your defaults above already handle this */
+  /* Add any large monitor tweaks here if needed */
+}
+
+/************************************************************************************************************************************** FINAL LAYOUT END */
+/************************************************************************************************************************************** FINAL LAYOUT END */
+
+
+
+
+
+
+
+
+
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-title { font-size: 3.5rem; }
+      .hero-sub { font-size: 1.4rem; }
+      .project-detail-header h1 { font-size: 2.5rem; }
+      .right-col { position: static; }
+    }
+  </style>
+
+</head>
+<body>
+  <!-- Sticky top bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="logo"><span class="logo-dots" aria-hidden="true">&#8278;</span>elev<span>atum</span></div>
+      <div class="nav">
+        <!-- ALL dropdown -->
+        <div class="dropdown" id="allDropdown">
+          <div class="dropbtn">Production Toolkit<i class="fas fa-chevron-down"></i></div>
+          <div class="dropdown-content" id="allMenu"></div>
+        </div>
+
+        <!-- JIRA dropdown -->
+        <div class="dropdown" id="jiraDropdown">
+          <div class="dropbtn">Jira <i class="fas fa-chevron-down"></i></div>
+          <div class="dropdown-content" id="jiraMenu"></div>
+        </div>
+
+        <!-- DOCS dropdown -->
+        <div class="dropdown" id="docsDropdown">
+          <div class="dropbtn">Docs <i class="fas fa-chevron-down"></i></div>
+          <div class="dropdown-content" id="docsMenu"></div>
+        </div>
+
+        <!-- TABLES dropdown -->
+        <div class="dropdown" id="tablesDropdown">
+          <div class="dropbtn">Tables <i class="fas fa-chevron-down"></i></div>
+          <div class="dropdown-content" id="tablesMenu"></div>
+        </div>
+        
+        <div class="home-btn" id="homeBtn"><i class="fas fa-home"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero section - full width -->
+
+<div class="hero-wrapper" id="heroWrapper">
+  <div class="hero-section">
+      
+      <!-- ROW 2: Image left + Hero Title right (with overflow) -->
+      <div class="row-2">
+        <div class="row-2-image">
+          <img src="assets/hero/row2img.png" alt="">
+        </div>
+        <div class="row-2-title">
+          <h1>Shaped by real<div class="second-line"><span>production</span> needs</div></h1>
+          <div class="elevateTop">elevate</div>
+        </div>
+      </div>
+
+      <!-- ROW 3: Subtitle full width -->
+      <div class="row-3">
+        <h2>Custom-built for the work you do</h2>
+      </div>
+
+      <!-- ROW 4: Image left + Bullet points right -->
+      <div class="row-4">
+        <div class="row-4-text">
+          <p class="intro hero-border">A collection of web and desktop applications that solve complex challenges, streamline operations, enforce accessibility, and deliver measurable improvements across real-world production environments.</p>
+          <p>Precision-driven workflows built for complex digital environments</p>
+        </div>
+        <div class="row-4-image">
+          <img src="assets/fcn/fcn-30.png" alt="">
+        </div>
+      </div>
+
+      <!-- ROW 5: Bullet points left + Image right -->
+      <div class="row-5">
+        <div class="row-5-image">
+          <img src="assets/cb/cb.png" alt="">
+        </div>
+        <div class="row-5-text">
+          Elevating systems and processes through thoughtful architecture and automation
+        </div>
+      </div>
+
+      <!-- ROW 6: Reserved -->
+      <div class="row-6">
+        <div class="elevate">elevate</div>
+      </div>
+
+      
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Project area - full width (hidden by default) -->
+  <div class="project-wrapper" id="projectWrapper" style="display: none;">
+    <div class="project-content" id="projectContent">
+      
+      <!-- Jira Workflow DistributionN -->
+      <div id="project-workload" class="project-detail">
+        <div class="project-detail-header">
+          <h1>Workload Distribution</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2026</span>
+            <span class="meta-item"><i class="fab fa-jira"></i>Jira Ecosystem</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">A real‑time dashboard that extracts and visualizes team workload directly from a Jira project view. It consolidates paginated ticket data into a single interactive panel, providing instant visibility into how work is distributed across the team and who has available capacity.</p>
+
+            <div class="gallery-section">
+              <a href="assets/jwd/progress.png" class="glightbox" data-title="<strong>Team Capacity Visualization</strong> — who is currently busy working on a ticket, who has availability">
+                <img src="assets/jwd/progress.png" alt="Workload Distribution preview" class="gallery-img">
+              </a>
+              <div class="gallery-caption">
+                <strong>Team Capacity Visualization</strong> — who is currently busy working on a ticket, who has availability
+              </div>
+            </div>
+
+              <div class="gallery-links">
+                <a href="assets/jwd/assign.png" class="glightbox gallery-link jwd-btn" data-title="<strong>Tickets Awaiting Assignment</strong> — displays unassigned items in the queue and team members availability">availability</a>
+                <a href="assets/jwd/progress-2.png" class="glightbox gallery-link jwd-btn" data-title="<strong>Dynamic Metrics</strong> — toggle between counts and percentages to visualize overall team workload">metrics</a>
+                <a href="assets/jwd/filter.png" class="glightbox gallery-link jwd-btn" data-title="<strong>Filtered View</strong> — only tickets for the selected status are displayed, providing a clear snapshot of workload">filter</a></p>
+              </div>
+
+            <div class="zero-badge" style="color: #ff7e7e;">
+              Zero infrastructure!
+            </div>
+            <p style="margin-bottom: 10px;">No installation. No backend dependencies. No system admin approvals.</p>
+            <a href="#" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>At a glance</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Unified data view</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically aggregates tickets from across paginated tables, presenting every team member and their current assignments in one place, eliminating the need to click through multiple pages or manually track counts</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Team capacity indicators</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">color‑coded stats immediately reveal who is busy and who has workload availability, turning raw ticket data into actionable insight</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">One‑click person filtering</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">click any team member's name to instantly isolate their tickets in the main table, ideal for quick progress checks without manual searching</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Status‑based navigation</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">toggle between workflow stages via dedicated buttons, each showing the total ticket count for that status to maintain context while switching views</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Dynamic workload metrics</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">switch between raw ticket counts and percentage‑of‑status distribution to understand both absolute volume and relative team share</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Focused team scope</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">displays data exclusively for team members, excluding unrelated assignees to ensure the dashboard always reflects your actual team composition</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Interactive data table</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">sort any column with a single click; headers stay visible while scrolling</div>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JIRA SyncFlow -->
+      <div id="project-syncflow" class="project-detail">
+        <div class="project-detail-header">
+          <h1>JIRA SyncFlow</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2026</span>
+            <span class="meta-item"><i class="fab fa-jira"></i>Jira Ecosystem</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">Centralizes multi‑step ticketing workflow into a single interface. It accelerates the JIRA review and pre-approval stages by reducing context switching, guiding key decision points, and supporting accurate, consistent communications.</p>
+
+            <div class="gallery-section">
+              <a href="assets/jsf/jsf-progress.png" class="glightbox">
+                <img src="assets/jsf/jsf-progress.png" alt="JIRA SyncFlow preview" class="gallery-img" style="box-shadow: 0px 0px 11px #a7b3c5; border-radius: 7px;">
+              </a>
+
+              <div class="gallery-caption">
+                <strong>Consolidated View</strong> — shows all components in one interface, including ticket status, estimated completion date, overdue indicators, and assigned reviewers
+              </div>
+            </div>
+
+            <div class="zero-badge zero-blue">
+              Zero infrastructure!
+            </div>
+            <p style="margin-bottom: 10px;">No installation. No backend dependencies. No system admin approvals.</p>
+
+            <a href="https://www.youtube.com/watch?v=2iAD4hLbbHs" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Core capabilities</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Consolidated workspace</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">eliminates the need to search across multiple sections of a ticket and navigate multiple platforms (Jira, Outlook, and AEM)</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Workflow friction reduction</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">removes unnecessary steps by integrating multiple tasks into a single interface, helping move tickets through review and approval stages faster</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Adaptive workflow guidance</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">detects the current ticket status and suggests the appropriate transition action, including safe rollback options when reversions are required</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Status timer indicator</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">shows how long a ticket has remained in its current stage, providing immediate insight into issues that are stalled, delayed, or overdue</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">One-click page access</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">opens all listed staging URLs instantly, either in the AEM editor or preview environment, without copying links individually or switching platforms</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Email draft generator</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">pre-fills recipients, subject lines, and relevant URLs, letting users switch between preview links for client approval or live links for final distribution</div>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DocPrep -->
+      <div id="project-docprep" class="project-detail">
+        <div class="project-detail-header">
+          <h1>DocPrep</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2026</span>
+            <span class="meta-item"><i class="fa-regular fa-file-word"></i>Document Conversion &amp; Accessibility</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">An application that provides pre-production analysis of Microsoft Word documents, identifying accessibility and structural issues while delivering actionable diagnostics through automated validation and accessibility scoring.</p>
+
+            <div class="gallery-section">
+              <a href="assets/dp/dp.jpg" class="glightbox" data-title="<strong>Automated Issue Detection</strong> — scans the document for accessibility, structure, formatting, and link integrity problems, categorizing findings by priority with a live accessibility score">
+                <img src="assets/dp/dp.jpg" alt="DocPrep preview" class="gallery-img">
+              </a>
+              <div class="gallery-caption">
+                <strong>Automated Issue Detection</strong> — scans the document for accessibility, structure, formatting, and link integrity problems, categorizing findings by priority with a live accessibility score
+              </div>
+            </div>
+
+              <div class="gallery-links">
+                <a href="assets/dp/dp-issues.jpg" class="glightbox gallery-link dp-btn" data-title="<strong>Automated Issue Detection</strong> — scans the document for accessibility, structure, formatting, and link integrity problems, categorizing findings by priority with a live accessibility score">issue detection</a>
+                <a href="assets/dp/dp-link-val.png" class="glightbox gallery-link dp-btn" data-title="<strong>Parallel Link Validation</strong> — executes URL checks in parallel, preserving full interface responsiveness during document analysis">link validation</a>
+              </div>
+
+            <a href="https://www.youtube.com/watch?v=FSQRzIO2pcY" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Key Features</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Comprehensive accessibility audit</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">detects missing alt text, malformed headings and lists, table structure errors, empty and colored background cells, and formatting issues (all caps, underline, italic usage)</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Smart link verification</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">validates external links in real-time, flags local/email links, and identifies same-text-different-URL inconsistencies</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Document health check</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">flags tracked changes and comments that impact diagnostic accuracy</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Priority-driven workflow</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">categorizes fixes by impact (high, medium, low) with detailed counts for each category</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Accessibility score</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">calculates an overall accessibility percentage and provides detailed health metrics for each content category</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Interactive diagnostic reports</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">generates a Word file featuring a TOC with CTRL+clickable links to flagged issues for review and correction</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Privacy-first analysis</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">the entire document is processed locally for security; only URLs are sent externally for link validation</div>
+              </li>
+            </ul>
+          </div>
+          <span class="tsk">Python</span>
+          <span class="tsk">Azure</span>
+          <span class="tsk">JavaScript</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- XML Morph -->
+      <div id="project-xmlmorph" class="project-detail">
+        <div class="project-detail-header">
+          <h1>XML Morph</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2023</span>
+            <span class="meta-item"><i class="fa-regular fa-file-code"></i>Document Conversion &amp; Accessibility</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">This tool effortlessly transforms well-structured HTML into custom XML format used in <a href="https://www.tbs-sct.canada.ca/pol/index-eng.aspx">TBS policy documents</a>, streamlining the conversion process.</p>
+
+            <div class="gallery-section">
+              <a href="assets/xml/xm-1.png" class="glightbox" data-title="<strong>UI / Overview</strong> — unified workspace for transforming and structuring XML content, with streamlined controls that simplify editing, formatting, and output management"><img src="assets/xml/xm-1.png" alt="XML Morph preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>UI / Overview</strong> — unified workspace for transforming and structuring XML content, with streamlined controls that simplify editing, formatting, and output management
+              </div>
+            </div>
+
+              <div class="gallery-links">
+                <a href="assets/xml/xm-2.png" class="glightbox gallery-link xml-btn" data-title="<strong>Toggleable XML Tree Panel</strong> — collapsible XML tree view for structured navigation, enabling quick inspection and precise node-level editing without leaving the main workspace">xml tree toggle</a>
+                <a href="assets/xml/xm-3.png" class="glightbox gallery-link xml-btn" data-title="<strong>XML & HTML Validation</strong> — real-time structural validation detects malformed tags, hierarchy errors, and formatting issues to ensure clean, standards-compliant output">validation</a>
+              </div>
+
+            <a href="https://www.youtube.com/watch?v=Gr9KHV1bIQE&pp=0gcJCaIKAYcqIYzv" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Main functions</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Initial storage</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">stores the user's original pasted content so it can be reverted or compared later</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">HTML to XML conversion</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">converts HTML into a custom XML format that includes structural elements like chapters, appendices, clauses, and sections. it also adds headers, handles special characters, and replaces standard list tags with more semantic equivalents</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">XML to HTML conversion</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">reverses the above process, stripping out XML wrappers and reconstructing readable HTML</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">List handling</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">distinguishes between clause-style lists and normal lists to ensure only the appropriate ones are converted to <code>&lt;clause&gt;</code> elements</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Section wrapping</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically groups headings and their following content into semantic sections based on heading levels</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Preview and error display</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">renders color-coded structured output and displays error messages or a parsed view as needed</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Cleanup</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">removes style elements and ensures self-closing tags are handled correctly</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Validation</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">checks for matching and balanced HTML/XML tags, reporting issues if any tags are unbalanced or improperly structured</div>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CodeBOT -->
+      <div id="project-codebot" class="project-detail">
+        <div class="project-detail-header">
+          <h1>CodeBOT</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2020</span>
+            <span class="meta-item"><i class="fa-regular fa-file-word"></i>Document Conversion &amp; Accessibility</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">Analytics-driven automated HTML editor that opens Word documents of all sizes while applying the Canadian Standard on Web Accessibility. CodeBOT combines a sequential processing pipeline from core syntax cleanup to content structuring, streamlining the conversion workflow and supporting WCAG compliance.</p>
+
+            <div class="gallery-section">
+              <a href="assets/cb/cb.png" class="glightbox" data-title="<strong>UI / Overview</strong> — main editor workspace with real-time diagnostics, syntax & accessibility validation, and table accessibility settings in a single interface"><img src="assets/cb/cb.png" alt="CodeBOT preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>UI / Overview</strong> — main editor workspace with real-time diagnostics, syntax &amp; accessibility validation, and table accessibility settings in a single interface
+              </div>
+            </div>
+            
+              <div class="gallery-links">
+                <a href="assets/cb/cb-links.png" class="glightbox gallery-link cb-btn" data-title="<strong>Parallel Link Validation</strong> — runs link checks independently and in parallel, displaying live status codes while letting you continue working uninterrupted in the editor">link validation report</a>
+                <a href="assets/cb/codebot-architecture.png" class="glightbox gallery-link cb-btn" data-title="<strong>System Architecture</strong> — detailed visual blueprint of the end-to-end processing pipeline, illustrating component interactions, data flow, and automated execution stages">system architecture</a>
+              </div>
+
+            <h2 style="color: #334161; margin-top: 2rem;">Modules added since rollout</h2>
+
+            <div class="description">
+            <ul>
+              <li><strong>TableNote Pro (2022):</strong> an enhanced version of <a class="elvt-link" onclick="showProject('tablenote')">TableNote (2021)</a>, a tool for auto-generating footnotes in HTML tables. It provides new options such as toggling footnotes on or off, visual highlighting to identify and trace footnote references, and the ability to inject the footnote section directly within the table</li>
+              <li><strong>Link Validator (2024):</strong> a utility that runs in parallel yet independently of main editing tasks. It scans all hyperlinks to detect broken, redirected, or malformed URLs and generates a detailed status report complete with visual indicators, copy/export tools, and an HTTP status legend. It features a 3-slot FIFO popup architecture ensuring only the latest reports are visible. Built from scratch, this component can be integrated into other systems with minimal modification</li>
+              <li><strong>Paste from external sources (2025):</strong> this feature expands CodeBOT’s capabilities beyond its original support for .docx files and plain text, allowing users to copy and paste content from a variety of sources (Word, Excel, web pages, Google Sheets, etc.) directly into the editor while preserving structure and formatting</li>
+              <li><strong>Link Validator (2025 – Redesigned):</strong> a fully revamped system featuring a dedicated Link Validation section, Google Sheets export, Outlook email integration, and archive management, streamlining workflow and enhancing user focus</li>
+            </ul>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=-A2c1ZdrJO4" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Core functionality</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Syntax cleanup</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">removes proprietary Microsoft markup, deprecated attributes, extra spaces, line breaks, and empty tags for cleaner, standards-compliant HTML</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Dynamic language detection</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">applies language-specific formatting to English or French content</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Content structuring</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">builds table of contents, corrects malformed structural elements, encodes images and bilingual footnotes, adds semantic section tags, and formats definition lists</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Table accessibility</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">allows users to navigate each table either directly within the editor or through a modal preview built on a Shadow DOM architecture. It applies proper table markup (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>), sets auto-scope attributes, and enables toggling of basic formatting options</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">URL processing</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">decodes Outlook Safe Links, converts absolute URLs to relative paths, and provides a Link Status Report that identifies broken links</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Analytics and feedback</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">provides real-time counts displayed beside each operation, allowing users to immediately see how many instances of specific issues or elements (such as deprecated attributes or footnotes) are present in the HTML. This helps users quickly assess the scope of cleanup and improvements needed</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Real-time validation</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically detects HTML syntax errors, invalid heading hierarchy structure, accessibility errors, and displays them in the console panel, with each message clickable to jump directly to the specific line number</div>
+              </li>
+            </ul>
+          </div>
+
+          <span class="tsk">JavaScript</span>
+          <span class="tsk">CodeMirror 5.65.2</span>
+          <span class="tsk">Google Apps Script</span>
+
+          </div>
+        </div>
+      </div>
+      
+      <!-- AutoPDF Builder -->
+      <div id="project-autopdf" class="project-detail">
+        <div class="project-detail-header">
+          <h1>AutoPDF Builder</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2020</span>
+            <span class="meta-item"><i class="fa-regular fa-file-pdf"></i>Document Conversion &amp; Accessibility</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">This application automates a previously manual time-consuming task by converting web pages into bilingual PDF files. It reads URLs from a spreadsheet and processes each one converting the page to a PDF file.</p>
+
+            <div class="gallery-section">
+              <a href="assets/apb/apb.png" class="glightbox" data-title="<strong>Browser PDF Automation Pipeline</strong> — processes spreadsheet-based URLs, expands dynamic content, sanitizes layout elements, and generates consistent bilingual PDF outputs"><img src="assets/apb/apb.png" alt="AutoPDF Builder preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>Browser PDF Automation Pipeline</strong> — processes spreadsheet-based URLs, expands dynamic content, sanitizes layout elements, and generates consistent bilingual PDF outputs
+              </div>
+            </div>
+ 
+            <a href="https://www.youtube.com/watch?v=ZizEmOH_jNU" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>How it works</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Automated page preparation</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">loads each web page and expands all collapsible elements (<code>&lt;details&gt;</code> tags) to ensure that all content is visible before printing</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Content cleanup</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">removes non-essential elements such as breadcrumb navigation and archived notices to generate a clean, print-focused layout</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Print configuration</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically configures the browser's print settings (e.g., layout, margins, headers/footers) to ensure consistent PDF formatting</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Bilingual processing</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">saves the English version as a PDF, switches to the corresponding French page, and repeats the preparation and export steps</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Batch execution</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">reads and processes multiple URLs sequentially from a spreadsheet to eliminate repetitive manual work</div>
+              </li>
+            </ul>
+          </div>
+
+          <span class="tsk">Python</span>
+          <span class="tsk">Selenium WebDriver</span>
+          <span class="tsk">ChromeDriver</span>
+          <span class="tsk">Chrome browser</span>
+          <span class="tsk">JavaScript</span>
+          <span class="tsk">Excel</span>
+
+          </div>
+        </div>
+      </div>
+      
+      <!-- Flash-Conv -->
+      <div id="project-flashconv" class="project-detail">
+        <div class="project-detail-header">
+          <h1>Flash-Conv</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2019</span>
+            <span class="meta-item"><i class="fa-regular fa-file-word"></i>Document Conversion &amp; Accessibility</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">Desktop application that converts Word documents (DOC and DOCX) to HTML5. Designed for high-volume workflows that process up to 1,000 files while providing complexity analysis, performance metrics, corrupted file recovery, and automated Outlook delivery.</p>
+
+            <div class="gallery-section">
+              <a href="assets/fcn/fcn-50.png" class="glightbox" data-title="<strong>Conversion dashboard</strong> — component overview of processing time, file metrics, corrupted file detection, and interactive charts for single files, ZIP archives, or folder uploads"><img src="assets/fcn/fcn-50.png" alt="Flash-Conv preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>Conversion dashboard</strong> — component overview of processing time, file metrics, corrupted file detection, and interactive charts for single files, ZIP archives, or folder uploads
+              </div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=QWvQmaOP_jg" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Conversion &amp; analytics engine</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Batch processing</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">supports single-file or batch conversion from either a ZIP archive or directory, handling of large volumes with minimal user input</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Analytics</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">uses data science concepts to analyze HTML output by tabulating content, visualizing patterns with graphs, and applying mathematical methods to assess the complexity of the conversion process. This analytical insight helps identify challenges, optimize workflows, and improve overall conversion quality and efficiency</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Performance metrics</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">efficiently processes batches of up to 1,000 files in about 10 minutes with analytics feature enabled, or 2.5 minutes without analytics</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Corrupted file recovery</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically flags and converts damaged files that cannot be opened manually</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Outlook integration</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">results are emailed automatically via Outlook for streamlined delivery</div>
+              </li>
+            </ul>
+          </div>
+
+          <span class="tsk">Python</span>
+          <span class="tsk">Win32com.client</span>
+          <span class="tsk">Headless Chrome</span>
+          <span class="tsk">Vue.js</span>
+          <span class="tsk">Chart.js</span>
+          <span class="tsk">Eel</span>
+
+          </div>
+        </div>
+      </div>
+      
+      <!-- Flash-Code -->
+      <div id="project-flashcode" class="project-detail">
+        <div class="project-detail-header">
+          <h1>Flash-Code</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2019</span>
+            <span class="meta-item"><i class="fa-regular fa-file-word"></i>Document Conversion &amp; Accessibility</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">An innovative desktop application designed for Web Publishing tasks. It offers customized automation features that streamline routine publishing tasks, allowing users to work faster and more efficiently than with traditional code editors. Unlike standard tools, Flash-Code provides unique capabilities not found in other editors.</p>
+
+            <div class="gallery-section">
+              <a href="assets/fc/fc.png" class="glightbox" data-title="<strong>UI / Overview</strong> — desktop workspace for web publishing with batch processing, Word-to-HTML conversion, and Drupal CMS integration for automated content population"><img src="assets/fc/fc.png" alt="Flash-Code preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>UI / Overview</strong> — desktop workspace for web publishing with batch processing, Word-to-HTML conversion, and Drupal CMS integration for automated content population
+              </div>
+            </div>
+            
+              <div class="gallery-links">
+                <a href="assets/fc/fc-table.png" class="glightbox gallery-link fc-btn" data-title="<strong>Instant WET4 Integration</strong> — send tables straight to the WET4 Table Validator without leaving Flash‑Code, streamlining web accessibility validation in a single click">WET4 Table Validator</a>
+              </div>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Key Features</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Instant conversion</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">opens Word documents in HTML</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Batch operations</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">runs multiple search-and-replace commands simultaneously</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Drupal integration</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">creates web pages by populating HTML content and access HTML source code without login</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Table accessibility</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">extracts HTML tables for interaction with the WET4 Table Validator, then reintegrates the accessible code into the application</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Customization</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">configures images, lists, inks, and footnotes using built-in tools for consistent formatting</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Access control</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">ensures the application runs only on approved devices and accounts, while detecting and reporting any unauthorized access attempts</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Platform integration</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">Drupal 7, Outlook, WET4 Table Validator</div>
+              </li>
+            </ul>
+          </div>
+
+          <span class="tsk">Python</span>
+          <span class="tsk">Win32com.client</span>
+          <span class="tsk">Headless Chrome</span>
+          <span class="tsk">JavaScript</span>
+          <span class="tsk">JQuery</span>
+          <span class="tsk">CodeMirror 5.43.0</span>
+          <span class="tsk">Bootstrap 4.3.1</span>
+
+          </div>
+        </div>
+      </div>
+      
+      <!-- TableXtract -->
+      <div id="project-tablextract" class="project-detail">
+        <div class="project-detail-header">
+          <h1>TableXtract <span style="font-weight: 300;font-size: 0.55em;position: relative;top: -6px;">✦ AI-Powered</span></h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2025</span>
+            <span class="meta-item"><i class="fas fa-table"></i>Table Framework</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">Cloud-based microservice that converts table images into structured HTML. It accepts binary image uploads, performs server-side OCR and table detection, and returns clean, standardized output ready for downstream automation. The service runs in both local and web-based environments, delivering fast and consistent results. Built as a scalable, serverless component, TableXtract can be easily integrated into existing applications and workflows that require accurate table extraction from screenshots, scans, or other image sources.</p>
+
+            <div class="gallery-section">
+              <a href="assets/tx/tx-1.png" class="glightbox" data-title="<strong>AI-Powered Table Extraction</strong> — converts uploaded images into structured, editable tables with preserved layout and cell relationships"><img src="assets/tx/tx-1.png" alt="TableXtract preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>AI-Powered Table Extraction</strong> — converts uploaded images into structured, editable tables with preserved layout and cell relationships
+              </div>
+            </div>
+            
+              <div class="gallery-links">
+          <a href="assets/tx/tx-2.png" class="glightbox gallery-link tx-btn" data-title="<strong>Structured HTML Output</strong> — generated, standards-compliant table markup ready for direct integration into web workflows">HTML code view</a>
+              </div>
+
+            <a href="https://www.youtube.com/watch?v=NJcuGlP4PTw" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+
+            <a href="https://tablextractstorage.z19.web.core.windows.net/" class="youtube-btn txt-live">
+              Try TableXtract live!
+            </a>
+
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Core features</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Smart table recognition</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically identifies tables and their structure in images using AI-powered analysis</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Spell check integration</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">flags potential spelling errors in extracted text with visual highlighting and suggested corrections</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Clean HTML output</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">produces well-structured, accessible HTML tables ready for direct use or automation</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Flexible output options</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">provides easy ways to copy, download, and preview results, including a code view toggle for developer workflows</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Drag-and-drop interface</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">supports intuitive file uploads with instant preview for common image formats (JPEG, PNG, BMP, GIF)</div>
+              </li>
+            </ul>
+          </div>
+
+          <span class="tsk">Python</span>
+          <span class="tsk">Azure</span>
+          <span class="tsk">JavaScript</span>
+
+          </div>
+        </div>
+      </div>
+      
+      <!-- TableCraft -->
+      <div id="project-tablecraft" class="project-detail">
+        <div class="project-detail-header">
+          <h1>TableCraft</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2024</span>
+            <span class="meta-item"><i class="fas fa-table"></i>Table Framework</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">Originally designed with financial data in mind, this tool provides a graphical interface for editing and customizing HTML tables. It enables quick styling and structural changes, while also managing accessibility attributes without the need to write HTML code.</p>
+
+            <div class="gallery-section">
+              <a href="assets/tc/tc.png" class="glightbox" data-title="<strong>Graphical Table Editor</strong> — real-time HTML table customization with structural controls, accessibility management, and instant visual feedback"><img src="assets/tc/tc.png" alt="TableCraft preview" class="gallery-img"></a>
+              <div class="gallery-caption">
+                <strong>Graphical Table Editor</strong> — real-time HTML table customization with structural controls, accessibility management, and instant visual feedback
+              </div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=o0CL_ExgIm8" class="youtube-btn">
+              Watch on <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Core capabilities</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Real-time preview</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">displays a live preview of your HTML table as you type, showing changes instantly</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Interactive editing</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">users can click directly on table cells, columns, or the caption in the preview to apply changes</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Flexible operations</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">ability to choose from various modes to edit single cells, entire columns, or the caption, and apply styles, structure changes, or accessibility attributes</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Undo and cleanup</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">easily reverse recent modifications or clean up the HTML by removing unnecessary tags or classes</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Code management</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">copy the cleaned HTML to your clipboard or reset the table to its initial state</div>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TableSync Mirror -->
+      <div id="project-tablesync" class="project-detail">
+        <div class="project-detail-header">
+          <h1>TableSync Mirror</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2024</span>
+            <span class="meta-item"><i class="fas fa-table"></i>Table Framework</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">This tool easily synchronizes two HTML tables by transferring only the updated content from one table to another, while preserving the original formatting and structure.</p>
+
+            <div class="description">
+              <h2>Purpose &amp; Value</h2>
+
+              <ul>
+                <li><strong>Update tables safely</strong> – designed for situations where tables need to be updated without breaking existing formatting</li>
+                <li><strong>Avoid errors</strong> – prevents blindly copying everything and accidentally overwriting correct data</li>
+                <li><strong>Save time</strong> – syncs only the content that has changed, reducing manual work</li>
+                <li><strong>Preserve formatting</strong> – keeps table structure and styles intact so users don’t need to reapply formatting</li>
+                <li><strong>Visual difference tracking</strong> – highlights changes between tables, making updates easier to review and errors easier to catch</li>
+                <li><strong>Simplify table comparison</strong> – makes comparing and updating multiple tables fast, simple, and safe</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Key Features</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Dual Table Interface</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">two side-by-side panels with textareas for pasting HTML table code, live previews that update as you type, and automatic highlighting of differences between tables</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Synchronization Controls</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">Buttons to copy cell data, headers, captions, or all elements from the second table to the first</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Table Management</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">reset tables to their original state, clear both textareas, and copy the modified table’s HTML to the clipboard</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Smart Features</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically removes extra paragraph tags and whitespace, checks table structure before syncing, and highlights updates with color-coded feedback in real time</div>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TableNote -->
+      <div id="project-tablenote" class="project-detail">
+        <div class="project-detail-header">
+          <h1>TableNote</h1>
+          <div class="header-meta">
+            <span class="meta-item"><i class="far fa-calendar"></i>2021</span>
+            <span class="meta-item"><i class="fas fa-table"></i>Table Framework</span>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <p class="description">This tool streamlines the process of adding footnotes to HTML tables by automatically generating, formatting, and organizing them. It eliminates manual numbering and markup management while ensuring structural consistency.</p>            
+
+            <div class="gallery-section">
+              <a href="assets/tn/tn.png" class="glightbox" data-title="<strong>TableNote Output</strong> — generates multi-referenced footnotes and footnote section">
+                <img src="assets/tn/tn.png" alt="TableNote preview" class="gallery-img">
+              </a>
+
+              <div class="gallery-caption">
+                <strong>TableNote Output</strong> — generates multi-referenced footnotes and footnote section
+              </div>
+            </div>
+          </div>
+
+          <div class="right-col">
+          <div class="features">
+            <div class="features-header">
+              <h3>Core capabilities</h3>
+              <i class="fas fa-chevron-down expand-all-icon"></i>
+            </div>
+            
+            <ul class="capabilities-list">
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Automatic footnote generation</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">creates properly formatted footnotes wrapped in <code>&lt;sup&gt;</code> tags and linked to their corresponding references</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Sequential numbering and symbols</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">processes numeric footnotes first, followed by symbol-based references in the correct order</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Multi-reference support</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">allows multiple references to point to the same footnote without duplicating content</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Smart table identification</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">automatically retrieves and pre-fills the table ID from the <code>&lt;caption&gt;</code> element</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Language toggle</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">dynamically switches between English and French, instantly updating the generated markup</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">Footnotes section creation</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">generates a structured footnotes block directly below the table for clear organization</div>
+              </li>
+              <li class="cap-item">
+                <div class="cap-header">
+                  <span class="cap-title">WET-BOEW 4.0 compliant</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="cap-description">follows the <a href="https://wet-boew.github.io/v4.0-ci/demos/footnotes/footnotes-en.html" class="elvt-link">footnotes guidelines</a> framework for semantic HTML, accessibility, and multilingual support</div>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add more projects here following same pattern -->
+      
+    </div>
+    
+  <div class="signature" style="max-width: 1120px; margin: 1rem auto 0; text-align: right; color: #94a3b8; font-size: 0.9rem;">
+    © elevatum 2019–2026
+  </div>
+
+  </div>
+
+
+  <script>
+    // Populate dropdowns
+    const dropdownData = [
+      { cat: 'Jira Ecosystem', items: [
+        { name: 'Workload Distribution', year: 2026, id: 'workload' },
+        { name: 'JIRA SyncFlow', year: 2026, id: 'syncflow' }
+      ]},
+      { cat: 'Document Conversion & Accessibility', items: [
+        { name: 'DocPrep', year: 2026, id: 'docprep' },
+        { name: 'XML Morph', year: 2023, id: 'xmlmorph' },
+        { name: 'CodeBOT', year: 2020, id: 'codebot' },
+        { name: 'AutoPDF Builder', year: 2020, id: 'autopdf' },
+        { name: 'Flash-Conv', year: 2019, id: 'flashconv' },
+        { name: 'Flash-Code', year: 2019, id: 'flashcode' }
+      ]},
+      { cat: 'Table Framework', items: [
+        { name: 'TableXtract ✦ AI', year: 2025, id: 'tablextract' },
+        { name: 'TableCraft', year: 2024, id: 'tablecraft' },
+        { name: 'TableSync Mirror', year: 2024, id: 'tablesync' },
+        { name: 'TableNote', year: 2021, id: 'tablenote' }
+      ]}
+    ];
+
+    // Build ALL dropdown
+    let allHtml = '';
+    dropdownData.forEach(cat => {
+      allHtml += `<div class="dropdown-cat">${cat.cat}</div>`;
+      cat.items.forEach(item => {
+        allHtml += `<div class="dropdown-item" data-project="${item.id}"><span>${item.name}</span> <span class="year">${item.year}</span></div>`;
+      });
+    });
+    document.getElementById('allMenu').innerHTML = allHtml;
+
+    // Build category dropdowns
+    function buildCategoryMenu(catKey, items) {
+      return items.map(item => 
+        `<div class="dropdown-item" data-project="${item.id}"><span>${item.name}</span> <span class="year">${item.year}</span></div>`
+      ).join('');
+    }
+
+    document.getElementById('jiraMenu').innerHTML = buildCategoryMenu('jira', dropdownData[0].items);
+    document.getElementById('docsMenu').innerHTML = buildCategoryMenu('docs', dropdownData[1].items);
+    document.getElementById('tablesMenu').innerHTML = buildCategoryMenu('tables', dropdownData[2].items);
+
+    // DOM elements
+    const heroWrapper = document.getElementById('heroWrapper');
+    const projectWrapper = document.getElementById('projectWrapper');
+    const homeBtn = document.getElementById('homeBtn');
+    const allProjects = document.querySelectorAll('.project-detail');
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown-content').forEach(d => d.classList.remove('show'));
+      }
+    });
+
+
+/*
+    // Toggle dropdowns
+    document.querySelectorAll('.dropbtn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = btn.closest('.dropdown');
+        const content = dropdown.querySelector('.dropdown-content');
+        document.querySelectorAll('.dropdown-content').forEach(d => { if (d !== content) d.classList.remove('show'); });
+        content.classList.toggle('show');
+      });
+    });
+*/
+
+// Hover dropdowns - shows on hover, hides on leave
+document.querySelectorAll('.dropdown').forEach(dropdown => {
+  const content = dropdown.querySelector('.dropdown-content');
+  
+  // For desktop - hover
+  dropdown.addEventListener('mouseenter', () => {
+    // Close all other dropdowns first
+    document.querySelectorAll('.dropdown-content').forEach(d => {
+      if (d !== content) d.classList.remove('show');
+    });
+    content.classList.add('show');
+  });
+  
+  dropdown.addEventListener('mouseleave', () => {
+    // Small delay to allow moving mouse to dropdown
+    setTimeout(() => {
+      // Check if mouse is still over dropdown or content
+      if (!dropdown.matches(':hover') && !content.matches(':hover')) {
+        content.classList.remove('show');
+      }
+    }, 100);
+  });
+  
+  // Keep click for mobile (toggles on tap)
+  dropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+    content.classList.toggle('show');
+    
+    // Close other dropdowns
+    document.querySelectorAll('.dropdown-content').forEach(d => {
+      if (d !== content) d.classList.remove('show');
+    });
+  });
+});
+
+// Close dropdowns when clicking outside (keeps your existing functionality)
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dropdown')) {
+    document.querySelectorAll('.dropdown-content').forEach(d => d.classList.remove('show'));
+  }
+});
+
+
+
+
+
+
+
+
+
+
+// Update setupExpandAll to work within the active project
+function setupExpandAll() {
+  const activeProject = document.querySelector('.project-detail.active');
+  if (!activeProject) return;
+  
+  const expandAllIcon = activeProject.querySelector('.expand-all-icon');
+  if (!expandAllIcon) return;
+  
+  // Remove any existing event listener to prevent duplicates
+  const newIcon = expandAllIcon.cloneNode(true);
+  expandAllIcon.parentNode.replaceChild(newIcon, expandAllIcon);
+  
+  let allExpanded = false;
+  
+  newIcon.addEventListener('click', () => {
+    // Only target descriptions and headers within the active project
+    const descriptions = activeProject.querySelectorAll('.cap-description');
+    const headers = activeProject.querySelectorAll('.cap-header');
+    
+    allExpanded = !allExpanded;
+    
+    descriptions.forEach(desc => {
+      if (allExpanded) {
+        desc.classList.add('show');
+      } else {
+        desc.classList.remove('show');
+      }
+    });
+    
+    headers.forEach(header => {
+      if (allExpanded) {
+        header.classList.add('open');
+      } else {
+        header.classList.remove('open');
+      }
+    });
+    
+    newIcon.classList.toggle('expanded', allExpanded);
+  });
+}
+
+// Update the individual toggle setup to work within active project
+function setupIndividualToggles() {
+  const activeProject = document.querySelector('.project-detail.active');
+  if (!activeProject) return;
+  
+  activeProject.querySelectorAll('.cap-header').forEach(header => {
+    // Remove existing listeners to prevent duplicates
+    const newHeader = header.cloneNode(true);
+    header.parentNode.replaceChild(newHeader, header);
+    
+    newHeader.addEventListener('click', () => {
+      const description = newHeader.nextElementSibling;
+      const icon = newHeader.querySelector('i');
+      
+      description.classList.toggle('show');
+      newHeader.classList.toggle('open');
+    });
+  });
+}
+
+// Update showProject function
+function showProject(projectId) {
+  // Hide all projects
+  allProjects.forEach(p => p.classList.remove('active'));
+  
+  // Show selected project
+  const selected = document.getElementById(`project-${projectId}`);
+  if (selected) {
+    selected.classList.add('active');
+  }
+  
+  // Hide hero, show project wrapper
+  heroWrapper.style.display = 'none';
+  projectWrapper.style.display = 'block';
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'  // Optional smooth scroll
+  });
+  
+  // Reinitialize toggles for the new project
+  setTimeout(() => {
+    setupIndividualToggles();
+    setupExpandAll();
+  }, 50);
+}
+
+// Update DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Setup initial toggles if a project is active
+  if (document.querySelector('.project-detail.active')) {
+    setupIndividualToggles();
+    setupExpandAll();
+  }
+});
+
+    
+    // Project selection
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const projectId = item.dataset.project;
+        showProject(projectId);
+        
+        // Close dropdowns
+        document.querySelectorAll('.dropdown-content').forEach(d => d.classList.remove('show'));
+      });
+    });
+
+    // Home button
+    homeBtn.addEventListener('click', () => {
+      heroWrapper.style.display = 'block';
+      projectWrapper.style.display = 'none';
+      
+      // Hide all projects
+      allProjects.forEach(p => p.classList.remove('active'));
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Setup expand/collapse for core capabilities
+    document.querySelectorAll('.cap-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const description = header.nextElementSibling;
+        const icon = header.querySelector('i');
+        
+        description.classList.toggle('show');
+        header.classList.toggle('open');
+      });
+    });
+
+window.addEventListener('scroll', function() {
+  const topBar = document.querySelector('.top-bar');
+  const allDropdownContents = document.querySelectorAll('.dropdown-content');
+  const allDropdownItems = document.querySelectorAll('.dropdown-item');
+  
+  if (window.scrollY > 50) {
+    topBar.classList.add('scrolled');
+    
+    allDropdownContents.forEach(content => {
+      content.classList.add('scrolled');
+    });
+    
+    allDropdownItems.forEach(item => {
+      item.classList.add('scrolled');
+    });
+    
+  } else {
+    topBar.classList.remove('scrolled');
+    
+    allDropdownContents.forEach(content => {
+      content.classList.remove('scrolled');
+    });
+    
+    allDropdownItems.forEach(item => {
+      item.classList.remove('scrolled');
+    });
+  }
+});
+
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // or 'auto' for no animation
+    });
+  }, 10);
+});
+
+  </script>  
 
   <script>
   const lightbox = GLightbox({
@@ -654,10 +2540,6 @@ function showItem(id) {
     autoplayVideos: false
   });
 </script>
-
-</div>
-
-  <div class="signature">© elevatum 2019–2026</div>
 
 </body>
 </html>
